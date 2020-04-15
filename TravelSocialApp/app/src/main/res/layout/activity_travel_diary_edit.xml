@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.TravelDiaryEditActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_tab_height"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/travel_diary_exit"
+            android:layout_width="@dimen/top_tab_icon_size"
+            android:layout_height="@dimen/top_tab_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            app:srcCompat="@drawable/exit"
+            />
+
+        <Button
+            android:id="@+id/save_diary"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/top_tab_button_height"
+            android:layout_toLeftOf="@+id/release_diary"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            style="@style/GreenButtonText"
+            android:text="存草稿"
+            />
+
+        <Button
+            android:id="@+id/release_diary"
+            android:layout_width="70dp"
+            android:layout_height="@dimen/top_tab_button_height"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            style="@style/GreenButtonText"
+            android:text="发布"
+            />
+
+    </RelativeLayout>
+
+
+    <!--    使按钮始终悬浮在输入法上方的布局方式-->
+<!--   android:fillViewport="true"使内部组件 match_parent。在内部组件里设置是没有用的-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/travel_diary_bg_frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="160dp">
+
+
+                <ImageView
+                    android:id="@+id/travel_diary_bg_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@color/undefine_picture_gray" />
+
+                <EditText
+                    android:id="@+id/travel_diary_title"
+                    style="@style/EditInputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@color/travel_diary_title_bg_gray"
+                    android:hint="标题"
+                    android:inputType="text"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/travel_diary_change_bg_picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom|right"
+                    android:background="@color/travel_diary_title_bg_gray"
+                    android:text="更换背景" />
+
+                <Button
+                    android:id="@+id/travel_diary_bg_gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom|left"
+                    android:background="@color/travel_diary_title_bg_gray"
+                    android:text="隐藏" />
+
+            </FrameLayout>
+            <!--  android:gravity="top"光标从最上方开始
+        android:background="@null" 隐藏下方的线-->
+
+            <com.example.travelsocialapp.ui.View.PictureTextEditorView
+                android:id="@+id/travel_diary_edit"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="top">
+
+            </com.example.travelsocialapp.ui.View.PictureTextEditorView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/open_photo_album"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/note_textsize"
+            android:text="打开相册"
+            />
+        <Button
+            android:id="@+id/sys_to_topic"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/note_textsize"
+            android:text="同步到话题" />
+
+        <Button
+            android:id="@+id/sys_to_location"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/note_textsize"
+            android:text="同步到地区" />
+        <Button
+            android:id="@+id/hide_keyboard"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/note_textsize"
+            android:text="隐藏软键盘" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

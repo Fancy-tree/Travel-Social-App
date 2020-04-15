@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="green">#ff0cc079</color>
+    <color name="tab_bg_gray">#fff1ebed</color>
+    <color name="undefine_picture_gray">#C1C1C1</color>
+    <color name="travel_diary_title_bg_gray">#8fa7a7a7</color>
+
+</resources>

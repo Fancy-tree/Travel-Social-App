@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity">
+
+        <FrameLayout
+            android:id="@+id/fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+        </FrameLayout >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/tab_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+                        <TextView
+                            style="@style/TabButton"
+                            android:drawableTop="@drawable/tab_1_selector"
+                            android:text="@string/tab_1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+                        <TextView
+                            style="@style/TabButton"
+                            android:drawableTop="@drawable/tab_2_selector"
+                            android:text="@string/tab_2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+                        <TextView
+                            style="@style/TabButton"
+                            android:drawableTop="@drawable/tab_3_selector"
+                            android:text="@string/tab_3" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+                        <TextView
+                            style="@style/TabButton"
+                            android:drawableTop="@drawable/tab_4_selector"
+                            android:text="@string/tab_4" />
+                </LinearLayout>
+        </LinearLayout>
+
+
+</LinearLayout>

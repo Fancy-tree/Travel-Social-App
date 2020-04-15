@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    底部导航栏高度-->
+    <dimen name="bottom_tab_height">60dp</dimen>
+
+    <!--    顶部导航栏高度-->
+    <dimen name="top_tab_height">50dp</dimen>
+
+    <!--    顶部导航栏图标大小-->
+    <dimen name="top_tab_icon_size">17dp</dimen>
+
+    <!--    小圆按钮高-->
+    <dimen name="top_tab_button_height">33dp</dimen>
+
+
+<!--    用户界面-->
+    <!--    用户头像边长-->
+    <dimen name="user_picture">100dp</dimen>
+
+    <!--    用户头像背景黑色色块高-->
+    <dimen name="user_bg_black">250dp</dimen>
+
+    <!--    用户头像顶部距离= 用户头像背景黑色色块 - 用户头像边长/2 - 顶部导航栏高度-->
+    <dimen name="user_info_layout_marginTop">140dp</dimen>
+
+<!--  字号设定-->
+    <!--    大号字体 20sp   标题-->
+    <dimen name="title_textsize">20sp</dimen>
+    <!--    中号字体 17sp   按钮 顶部导航栏-->
+    <dimen name="middle_textsize">17sp</dimen>
+    <!--    小号字体 15sp   输入框hit-->
+    <dimen name="small_textsize">15sp</dimen>
+    <!--    备注字体 12sp   tab-->
+    <dimen name="note_textsize">12sp</dimen>
+</resources>
