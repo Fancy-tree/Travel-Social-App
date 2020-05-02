@@ -25,11 +25,13 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.example.travelsocialapp.R;
 import com.example.travelsocialapp.base.BaseActivity;
 import com.example.travelsocialapp.model.TravelDiary;
 import com.example.travelsocialapp.ui.View.PictureTextEditorView;
+import com.example.travelsocialapp.ui.View.SameDirectionScrollView;
 import com.example.travelsocialapp.util.AppUtil;
 import com.example.travelsocialapp.util.KeyBoardUtil;
 import com.example.travelsocialapp.util.SolveEditTextScrollClash;
@@ -45,17 +47,23 @@ public class TravelDiaryEditActivity extends BaseActivity implements View.OnClic
     private ImageView travel_diary_bg_picture;
     private FrameLayout travel_diary_bg_frameLayoutF;
     private Button  travel_diary_change_bg_pictureB,travel_diary_bg_goneB;
+    private ScrollView travel_diary_scrollS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_diary_edit);
+        init();
+    }
+
+    private void init(){
         travel_diary_editE= (PictureTextEditorView)findViewById(R.id.travel_diary_edit);
         travel_diary_titleE = (EditText)findViewById(R.id.travel_diary_title);
         travel_diary_bg_picture = (ImageView)findViewById(R.id.travel_diary_bg_picture);
         travel_diary_bg_frameLayoutF = (FrameLayout)findViewById(R.id.travel_diary_bg_frameLayout);
         travel_diary_change_bg_pictureB = (Button)findViewById(R.id.travel_diary_change_bg_picture);
         travel_diary_bg_goneB = (Button)findViewById(R.id.travel_diary_bg_gone);
+        travel_diary_scrollS = (ScrollView)findViewById(R.id.travel_diary_scroll);
 
         findViewById(R.id.open_photo_album).setOnClickListener(this);
         findViewById(R.id.save_diary).setOnClickListener(this);
@@ -63,6 +71,12 @@ public class TravelDiaryEditActivity extends BaseActivity implements View.OnClic
         findViewById(R.id.hide_keyboard).setOnClickListener(this);
         findViewById(R.id.travel_diary_change_bg_picture).setOnClickListener(this);
         findViewById(R.id.travel_diary_bg_gone).setOnClickListener(this);
+
+        //加长EditText，使EditText获得焦点时，滚动条能够自动向下一点，使标题与背景不那么挡文字
+        int SreenHeightpx = AppUtil.getSreenHeight(this);
+        LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) travel_diary_editE.getLayoutParams();
+        params.height = SreenHeightpx -AppUtil.dip2px(this,500); //根据屏幕高度设置内容编辑区域 接收单位为px
+        travel_diary_editE.setLayoutParams(params);
 //        travel_diary_editE.setOnTouchListener(new SolveEditTextScrollClash(travel_diary_editE));
 
 
@@ -85,7 +99,10 @@ public class TravelDiaryEditActivity extends BaseActivity implements View.OnClic
 //
 //
 //        });
+
+
     }
+
 
     @Override
     public void onClick(View v) {
@@ -132,13 +149,16 @@ public class TravelDiaryEditActivity extends BaseActivity implements View.OnClic
     }
 
 
+
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                Log.i("Activity","Down");
                 break;
             case MotionEvent.ACTION_MOVE:
-                showToast("滑动");
                 break;
             case MotionEvent.ACTION_UP:
                 KeyBoardUtil.hideAllInputMethod(TravelDiaryEditActivity.this); //当用户点击时隐藏软键盘

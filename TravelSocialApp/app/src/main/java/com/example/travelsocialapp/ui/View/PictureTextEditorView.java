@@ -233,6 +233,7 @@ public class PictureTextEditorView extends EditText {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                Log.i("Edit","Down");
                 oldY = event.getY();
                 requestFocus();//获得焦点
                 break;

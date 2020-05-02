@@ -12,8 +12,16 @@
     <!--    小圆按钮高-->
     <dimen name="top_tab_button_height">33dp</dimen>
 
+<!--    定位-->
+    <!--    城市背景图片高-->
+    <dimen name="city_bg_picture">150dp</dimen>
+    <!--    城市上栏图标layout顶部距离 = 城市背景图片高 - 顶部导航栏-->
+    <dimen name="city_high_tab_layout_marginTop">100dp</dimen>
 
-<!--    用户界面-->
+
+
+
+    <!--    用户界面-->
     <!--    用户头像边长-->
     <dimen name="user_picture">100dp</dimen>
 
@@ -21,7 +29,10 @@
     <dimen name="user_bg_black">250dp</dimen>
 
     <!--    用户头像顶部距离= 用户头像背景黑色色块 - 用户头像边长/2 - 顶部导航栏高度-->
-    <dimen name="user_info_layout_marginTop">140dp</dimen>
+    <dimen name="user_info_layout_marginTop">150dp</dimen>
+    <!--    用户头像顶部距离= 用户头像背景黑色色块 - 用户头像边长/2 -->
+    <dimen name="other_user_info_layout_marginTop">200dp</dimen>
+
 
 <!--  字号设定-->
     <!--    大号字体 20sp   标题-->

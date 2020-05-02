@@ -2,6 +2,7 @@ package com.example.travelsocialapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -21,7 +22,8 @@ public class TravelDiaryActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.goto_write_diary){//点击写日志将跳转到编辑日志界面
-
+            Intent intent = new Intent(this, TravelDiaryEditActivity.class);
+            startActivity(intent);
         }
 
     }
