@@ -51,6 +51,14 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <!--    导航栏字体，白色-->
+    <style name="TopTabTextWhite">
+        <item name="android:textSize">@dimen/middle_textsize</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
 <!--    输入框字体,清晰-->
     <style name="EditInputText">
         <item name="android:textSize">@dimen/middle_textsize</item>

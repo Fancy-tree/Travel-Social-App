@@ -1,5 +1,8 @@
 package com.example.travelsocialapp.base;
 
+import android.util.Log;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,7 +14,8 @@ import java.util.Map;
 public class BaseInternetMessage {
     private String code;
     private String message;
-    private String resultStr;
+    private JSONObject resultJsonObject;
+
     private Map<String, BaseModel> resultMap;
     private Map<String, ArrayList<? extends BaseModel>> resultList;
 
@@ -29,20 +33,26 @@ public class BaseInternetMessage {
         this.message=message;
     }
 
-    public void setResult(String result) {
-        this.resultStr = result;
+    public void setResultJsonObject(JSONObject result) {
+        this.resultJsonObject = result;
     }
+
+    public String getCode() { return this.code; }
+
+    public String getMessage() { return this.message; }
+
+    public JSONObject getResultJsonObject() { return this.resultJsonObject; }
 
 
     //生成可发送信息
     //参数：标识码，信息体
     //返回：信息字符串
-    public static String produceMassage(String head,String body){
+    public static String produceInternetMassage(String code,JSONObject body){
         String result="";
         JSONObject obj = new JSONObject();
         try {
-            obj.put("head",head);
-            obj.put("body",body);
+            obj.put("code",code);
+            obj.put("result",body);
             result = obj.toString();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -54,21 +64,25 @@ public class BaseInternetMessage {
     //解释服务器返回信息
     //参数：从服务器得到的JSON字符串
     //返回：BaseMessage对象
-    public static BaseInternetMessage getMassage(String jsonStr){
+    public  static  BaseInternetMessage getInternetMassage(String jsonStr) throws JSONException {
         BaseInternetMessage message = new BaseInternetMessage();
         JSONObject jsonObject = null;
-        try {
+
             jsonObject = new JSONObject(jsonStr);
             if (jsonObject != null) {
                 message.setCode(jsonObject.getString("code"));
+//                Log.i("BaseInternetMessage",message.getCode());
                 message.setMessage(jsonObject.getString("message"));
-                message.setResult(jsonObject.getString("result"));
+                message.setResultJsonObject(jsonObject.getJSONObject("result"));
+
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
+
         return message;
     }
+
+
+
 
 
 }

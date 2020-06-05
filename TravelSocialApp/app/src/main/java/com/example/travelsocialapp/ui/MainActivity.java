@@ -10,6 +10,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener,LocationListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener,LocationListener,UserFragment.ToOtherActivity{
     private LinearLayout tab_1L, tab_2L, tab_3L, tab_4L;
     private Fragment homeF= new HomeFragment(), locationF= new LocationFragment(), mapF=new GuideMapFragment(), userF=new UserFragment();
 
@@ -64,6 +65,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
         getSupportFragmentManager().beginTransaction().add(R.id.fragment, homeF).commitAllowingStateLoss();
         getSupportFragmentManager().beginTransaction().show(homeF).commitAllowingStateLoss();
         tab_1L.setSelected(true);
+
 
     }
 
@@ -157,6 +159,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
         super.onResume();
         initWidget();
         startGPSLocation();
+
     }
 
     @Override
@@ -196,31 +199,40 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
         //获取系统定位管理器
         locmgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //获取当前可用的 最佳定位提供者（规格条件，是返回已启用的提供者）
+        assert locmgr != null;
         String provider = locmgr.getBestProvider(mCriteria, true);
 
         if(provider==null){
             showToast("已关闭定位");
         }else{
-            showToast(provider);
+//            showToast(provider);
             //定位提供者每次获得新的数据就通知程序（定位提供者，间隔x毫秒通知，超过x米通知，监听对象）
             locmgr.requestLocationUpdates(provider, 300, 1, this);
 
             Location location = locmgr.getLastKnownLocation(provider);
             if(location!=null){  //检查Location对象是否为null
-                List<Address> address = translationLocation(location);
-//                检查 地址是否为空
-                if(!address.isEmpty()){
+                try {
+                    List<Address> address = translationLocation(location);
+                    //                检查 地址是否为空
+                    if(!address.isEmpty()){
+                        String tmp = "";
+                        for(int i=0;i<address.get(0).getMaxAddressLineIndex();i++){
+                            tmp = tmp +" "+ address.get(0).getAddressLine(i);
+                        }
 
-                    String tmp = "";
-//                    for(int i=0;i<address.get(0).getMaxAddressLineIndex();i++){
-//                        tmp = tmp +" "+ address.get(0).getAddressLine(i);
-//                    }
-                    tmp = getCity(address.get(0).getAddressLine(0));
-                    tab_2_locationT.setText(tmp);
-                }else { //地址为空
-                    showToast("解析地址失败");
+                        Log.i("Location000：",tmp);
+                        tmp = getCity(tmp);
+                        tab_2_locationT.setText(tmp);
+//                        showToast("定位启动");
+                    }else { //地址为空
+                        showToast("解析地址失败");
+                    }
+
+                } catch (IOException e) {
+                    showToast("定位失败");
+                    e.printStackTrace();
+                    return;
                 }
-
             }else {
                 showToast("获取定位中");
 
@@ -230,45 +242,46 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
 
     }
 
-    //将中文定位字符串  “省”以后 “市”以前的内容获取到
+    //检测定位字符串中
     public String getCity(String location){
-        //        “省”的位置
-        int sheng = location.indexOf("省");
-        //        “市”的位置
-        int shi = location.indexOf("市");
-        String city = location.substring(sheng+1,shi);//(  ,  ]
+
+        String city = "暂无城市";
+        if(location.contains("重庆")){
+            city = "重庆";
+        }
+
         return  city;
     }
 
 
-
-
 //    地址解析(Location对象) 返回中文地址
-    public   List<Address> translationLocation(Location location)
-    {
+    public   List<Address> translationLocation(Location location) throws IOException {
         double height,weidu,jingdu,speed;
         height = location.getAltitude();//获取高度（米）
         weidu = location.getLatitude();//获取纬度
         jingdu = location.getLongitude();//获取经度
         speed = location.getSpeed();//获取速度（米/秒）
 
-//        Log.i("location",String.valueOf(weidu));
+        Log.i("location",String.valueOf(weidu));
+        Log.i("location",String.valueOf(jingdu));
 
         //(上下文，语言（取得系统默认语言）)
         Geocoder geo = new Geocoder(this,Locale.getDefault());
         List<Address> address = null;
-        try {
-            //(经度，纬度，返回结果数)
+
+            //(经度，纬度，返回结果数)如果无法定位会抛出错误
             address =  geo.getFromLocation(weidu,jingdu,1);
+
             if(address.isEmpty()){
+//                showToast("no address");
                 Log.i("location", "no address ");
             }else {
+//                showToast("has address");
                 Log.i("location", "has address ");
             }
            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+//        showToast("定位中");
         return address;
     }
 
@@ -279,7 +292,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
 //        showToast("定位改变");
 
         if(location!=null) {  //检查Location对象是否为null
-            List<Address> address = translationLocation(location);
+            List<Address> address = null;
+            try {
+                address = translationLocation(location);
+            } catch (IOException e) {
+                showToast("定位失败");
+                e.printStackTrace();
+                return;
+            }
 //                检查 地址是否为空
             if (!address.isEmpty()) {
 
@@ -289,6 +309,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
 //                    }
                 tmp = getCity(address.get(0).getAddressLine(0));
                 tab_2_locationT.setText(tmp);
+//                showToast("定位启动");
             } else {
                 showToast("获取定位失败");
             }
@@ -310,4 +331,38 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
     public void onProviderDisabled(String provider) {
 
     }
+
+//    UserFragment 接口，跳转登录界面
+    @Override
+    public void toLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivityForResult(intent,0);//向登录页跳转
+    }
+
+    @Override
+    public void toTravelDiaryActivity() {
+        Intent intent = new Intent(this, TravelDiaryActivity.class);
+        startActivity(intent);//向旅游日志页跳转
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0){//登录状态
+            if(resultCode==0){
+//                显示服务器返回的消息
+                showToast(data.getExtras().getString("LoginMessageFromSever"));
+            }else if(resultCode==1){//注册状态
+                // 显示服务器返回的消息
+                showToast(data.getExtras().getString("SigninMessageFromSever"));
+            }else{
+                Log.e("onActivityResult","Main Login 未定义状态");
+            }
+        }
+
+
+
+
+    }
+
 }

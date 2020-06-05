@@ -88,7 +88,7 @@ public class TravelDiary {
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.i("TravelDiary","ContentList to Json wrong");
+                Log.e("TravelDiary","ContentList to Json wrong");
             }
         }
         //遍历misBitmap 将所有项以string格式放入JSONArray
@@ -100,7 +100,7 @@ public class TravelDiary {
                 isBitmap.put(item);
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.i("TravelDiary","misBitmap to Json wrong");
+                Log.e("TravelDiary","misBitmap to Json wrong");
             }
         }
 
@@ -137,7 +137,7 @@ public class TravelDiary {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Log.i("TravelDiary","Json to ContentList wrong");
+                        Log.e("TravelDiary","Json to ContentList wrong");
                     }
                 }
 

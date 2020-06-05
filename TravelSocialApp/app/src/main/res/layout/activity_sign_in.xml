@@ -4,28 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.LoginActivity">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_tab_height"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/login_exit"
+        <ImageView
+            android:id="@+id/user_setting_back"
             android:layout_width="@dimen/top_tab_icon_size"
             android:layout_height="@dimen/top_tab_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/exit" />
+            android:layout_marginStart="10dp"
+            app:srcCompat="@drawable/back"/>
 
 
     </RelativeLayout>
 
 
     <TextView
-        android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -35,7 +37,7 @@
         android:text="Hi,\n欢迎开启轻旅" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/signin_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -44,52 +46,38 @@
         android:hint="输入手机号"
         android:inputType="phone" />
 
-    <LinearLayout
+
+    <EditText
+        android:id="@+id/signin_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:orientation="horizontal">
+        style="@style/EditInputText"
+        android:hint="输入密码"
+        android:inputType="textPassword" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            style="@style/EditInputText"
-            android:hint="输入密码"
-            android:inputType="textPassword" />
-
-        <TextView
-            android:id="@+id/forget_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textColor="@color/black"
-            android:textSize="17sp"
-            android:text="忘记密码" />
-
-    </LinearLayout>
+    <EditText
+        android:id="@+id/signin_password2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        style="@style/EditInputText"
+        android:hint="再次输入密码"
+        android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/signin_signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         style="@style/GreenButtonText"
-        android:text="登录"
+        android:text="注册"
         android:alpha="0.5"/>
-    <TextView
-        android:id="@+id/login_tosigin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="35dp"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:text="去注册" />
 
 </LinearLayout>

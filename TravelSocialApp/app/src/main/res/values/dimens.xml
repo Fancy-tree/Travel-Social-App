@@ -11,6 +11,11 @@
 
     <!--    小圆按钮高-->
     <dimen name="top_tab_button_height">33dp</dimen>
+    <!--    底部按钮高-->
+    <dimen name="bottom_button_height">45dp</dimen>
+
+    <!--边距 用于大标题左边距-->
+    <dimen name="margin1">10dp</dimen>
 
 <!--    定位-->
     <!--    城市背景图片高-->
@@ -37,7 +42,7 @@
 <!--  字号设定-->
     <!--    大号字体 20sp   标题-->
     <dimen name="title_textsize">20sp</dimen>
-    <!--    中号字体 17sp   按钮 顶部导航栏-->
+    <!--    中号字体 17sp   按钮 顶部导航栏 -->
     <dimen name="middle_textsize">17sp</dimen>
     <!--    小号字体 15sp   输入框hit-->
     <dimen name="small_textsize">15sp</dimen>

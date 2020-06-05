@@ -20,7 +20,7 @@ public class ImgUtil {
 
     }
 
-    //暂时没有用到
+    //没有用到
     //将String 转化为 bitmap图片
     public static Bitmap stringToBitmapImage(String s) {
         try {

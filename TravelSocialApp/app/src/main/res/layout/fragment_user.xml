@@ -127,7 +127,6 @@
 
                     <!--     android:gravity="fill_vertical"  垂直拉伸占满父空间，莫名实现了文字与图片对齐        -->
                     <TextView
-                        android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -138,7 +137,6 @@
                         android:textSize="@dimen/small_textsize" />
 
                     <TextView
-                        android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -148,7 +146,6 @@
                         android:textSize="@dimen/small_textsize" />
 
                     <TextView
-                        android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -163,7 +160,6 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -183,7 +179,6 @@
                         android:textSize="@dimen/small_textsize" />
 
                     <TextView
-                        android:id="@+id/textView14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

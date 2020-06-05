@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 
 //edittext和ScrollView冲突问题
+//暂时没有用到
 public class SolveEditTextScrollClash implements View.OnTouchListener {
 
     private EditText editText;

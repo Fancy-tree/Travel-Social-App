@@ -7,28 +7,18 @@
     android:orientation="vertical"
     tools:context=".ui.OtherUserActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/top_tab_height">
-
-        <ImageButton
-            android:id="@+id/login_exit"
-            android:layout_width="@dimen/top_tab_icon_size"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/back2"
-            android:scaleType="centerCrop" />
-    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
 
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <ImageView
                 android:layout_width="match_parent"
@@ -200,5 +190,22 @@
             </LinearLayout>
         </FrameLayout>
     </ScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_tab_height">
+
+        <ImageButton
+            android:id="@+id/login_exit"
+            android:layout_width="@dimen/top_tab_icon_size"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back2"
+            android:scaleType="centerCrop" />
+
+    </RelativeLayout>
+
 
 </FrameLayout>

@@ -37,6 +37,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
+                        android:paddingVertical="10dp"
+                        android:paddingLeft="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
                         android:gravity="center"
@@ -46,9 +48,11 @@
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/location_location_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="18dp"
+                        android:paddingRight="10dp"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/location_location"
                         app:srcCompat="@drawable/down" />
@@ -69,7 +73,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/imageView5"
+                            android:id="@+id/location_city_info_img"
                             android:layout_width="0dp"
                             android:layout_height="30dp"
                             android:layout_weight="1"
@@ -111,7 +115,7 @@
                         android:layout_marginTop="5dp">
 
                         <TextView
-                            android:id="@+id/textView"
+                            android:id="@+id/location_city_info_text"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

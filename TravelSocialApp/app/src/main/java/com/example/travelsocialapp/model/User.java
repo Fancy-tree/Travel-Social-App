@@ -15,17 +15,15 @@ public class User {
 
 
     //仅登录验证所需JsonString
-    public String getLoginJsonString(){
-        String str = "";
+    public JSONObject getLoginJsonObject(){
         JSONObject obj = new JSONObject();
         try {
             obj.put("phone", this.mphoneNum);
             obj.put("password",this.mpassword);
-            str = obj.toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return str;
+        return obj;
 
     }
 }

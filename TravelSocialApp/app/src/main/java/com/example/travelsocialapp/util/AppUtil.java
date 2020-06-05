@@ -3,6 +3,7 @@ package com.example.travelsocialapp.util;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.EditText;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //未分类的工具
 public class AppUtil {
@@ -48,6 +52,18 @@ public class AppUtil {
     }
 
 
-
+//    正则验证手机号格式
+    public static boolean isMobileNO(String mobiles){
+        boolean flag = false;
+        try{
+            Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+            Matcher m = p.matcher(mobiles);
+            flag = m.matches();
+        }catch(Exception e){
+            Log.i("Regular Expression","验证手机号码错误");
+            flag = false;
+        }
+        return flag;
+    }
 
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.SearchCityActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_tab_height">
+
+
+        <EditText
+            android:id="@+id/search_city_input"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_toLeftOf="@+id/search_city_back"
+            android:layout_centerVertical="true"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="15dp"
+            android:background="@drawable/round_input">
+
+        </EditText>
+
+        <TextView
+            android:id="@+id/search_city_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:layout_marginRight="10dp"
+            style="@style/TopTabText"
+            android:text="取消"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_city_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        />
+</LinearLayout>
