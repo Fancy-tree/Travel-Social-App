@@ -26,6 +26,18 @@
             />
 
         <Button
+            android:id="@+id/continue_diary"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/top_tab_button_height"
+            android:layout_toLeftOf="@+id/save_diary"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            style="@style/GreenButtonText2"
+            android:text="继续写"
+            />
+
+        <Button
             android:id="@+id/save_diary"
             android:layout_width="80dp"
             android:layout_height="@dimen/top_tab_button_height"
@@ -33,7 +45,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            style="@style/GreenButtonText"
+            style="@style/GreenButtonText2"
             android:text="存草稿"
             />
 
@@ -52,6 +64,12 @@
 
     </RelativeLayout>
 
+    <ProgressBar
+        android:id="@+id/travel_diary_edit_progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
     <!--    使按钮始终悬浮在输入法上方的布局方式-->
 <!--   android:fillViewport="true"使内部组件 match_parent。在内部组件里设置是没有用的-->
@@ -157,13 +175,15 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/note_textsize"
             android:text="同步到地区" />
+
         <Button
             android:id="@+id/hide_keyboard"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textSize="@dimen/note_textsize"
-            android:text="隐藏软键盘" />
+            android:text="隐藏软键盘"
+            android:visibility="gone"/>
 
 
     </LinearLayout>

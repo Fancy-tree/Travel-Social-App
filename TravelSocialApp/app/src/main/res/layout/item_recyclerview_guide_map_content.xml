@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/travel_diary_show_father_linearlayout"
-    android:layout_width="wrap_content"
+    android:orientation="vertical" android:layout_width="150dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_marginRight="15dp">
 
-    android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="重庆一日游" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:srcCompat="@color/undefine_picture_gray" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,13 +33,12 @@
             />
 
         <TextView
-            android:id="@+id/travel_diary_show_title"
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_weight="1"
-            android:textSize="@dimen/middle_textsize"
-            android:textStyle="bold"
-            android:text="标题" />
+            android:textSize="@dimen/small_textsize"
+            android:text="简介" />
     </LinearLayout>
 
     <RelativeLayout
@@ -77,6 +83,7 @@
             android:text="0" />
 
     </RelativeLayout>
+
 
 
 </LinearLayout>

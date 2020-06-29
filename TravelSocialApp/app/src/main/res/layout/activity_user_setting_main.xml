@@ -48,6 +48,7 @@
             android:text="个人设置" />
 
         <LinearLayout
+            android:id="@+id/user_setting_main_account"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -86,12 +87,12 @@
                 android:textSize="@dimen/small_textsize"
                 android:text="编辑个人资料" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="15dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                app:srcCompat="@drawable/in" />
+<!--            <ImageView-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="15dp"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                app:srcCompat="@drawable/in" />-->
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"

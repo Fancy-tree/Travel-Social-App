@@ -86,7 +86,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         }else if(v.getId()==R.id.login_tosigin){ //点击注册
             Intent intent = new Intent(this, SignInActivity.class);
-            startActivityForResult(intent,0);
+            startActivityForResult(intent,1);
         }else if(v.getId()==R.id.login_exit){ //点击关闭图标
             finish();
         }
@@ -95,12 +95,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onResume() {
         super.onResume();
-//        如果用户已登录，强制退出Activity
-//        SharedPreferences geteditorsp = getSharedPreferences("travel_social_app_sharedPreferences",MODE_PRIVATE);
-//        int isLogin =geteditorsp.getInt("user_isLogin",0);
-//        if(isLogin==1){
-//            finish();
-//        }
     }
 
     //异步登录验证
@@ -153,11 +147,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 flag=1;
 
                 if(flag==1){
+//                    储存用户基本信息
+                    sp.putString("user_name","昵称");//存储用户默认昵称
+                    sp.apply();
+                    //返回页面
                     Intent intent =  new Intent(LoginActivity.this,MainActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("LoginMessageFromSever",baseInternetMessage.getMessage());
                     intent.putExtras(bundle);
-                    setResult(0, intent);
+                    setResult(1, intent);
                     finish();
                 }
 
@@ -191,14 +189,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==0){//注册状态
-            if(resultCode==0){
+        if(requestCode==1){//注册状态
+            if(resultCode==2){//注册成功
 //                显示服务器返回的消息
                 Intent intent =  new Intent(LoginActivity.this,MainActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("SigninMessageFromSever",data.getExtras().getString("SigninMessageFromSever"));
                 intent.putExtras(bundle);
-                setResult(1, intent);
+                setResult(2, intent);
                 finish();
             }else {
                 Log.e("onActivityResult","LoginActivity 未注册成功");

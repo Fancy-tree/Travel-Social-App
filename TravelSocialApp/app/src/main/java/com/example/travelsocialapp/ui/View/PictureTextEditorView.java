@@ -1,7 +1,6 @@
 package com.example.travelsocialapp.ui.View;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,17 +12,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.webkit.URLUtil;
 import android.widget.EditText;
-
-import android.content.Context;
-import android.text.Layout;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.widget.EditText;
-
-import com.example.travelsocialapp.ui.TravelDiaryEditActivity;
-import com.example.travelsocialapp.util.KeyBoardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +38,7 @@ public class PictureTextEditorView extends EditText {
     public List<Bitmap> getBitmapList() {
         return BitmapList;
     }
-
-
+    
 
     public static final String mBitmapTag = "☆";
     private String mNewLineTag = "ஐ";

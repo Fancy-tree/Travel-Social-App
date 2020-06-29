@@ -8,11 +8,38 @@
     tools:context=".ui.MainActivity">
 
         <FrameLayout
-            android:id="@+id/fragment"
+            android:id="@+id/fragment1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
+            >
+        </FrameLayout >
+        <FrameLayout
+            android:id="@+id/fragment2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+        </FrameLayout >
+        <FrameLayout
+            android:id="@+id/fragment3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+        </FrameLayout >
+        <FrameLayout
+            android:id="@+id/fragment4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone"
             >
         </FrameLayout >
 

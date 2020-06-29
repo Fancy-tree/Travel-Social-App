@@ -76,8 +76,6 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
     }
 
     private int canreflush=1;

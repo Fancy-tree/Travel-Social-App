@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,12 +42,13 @@ import java.util.Locale;
 public class MainActivity extends BaseActivity implements View.OnClickListener,LocationListener,UserFragment.ToOtherActivity{
     private LinearLayout tab_1L, tab_2L, tab_3L, tab_4L;
     private Fragment homeF= new HomeFragment(), locationF= new LocationFragment(), mapF=new GuideMapFragment(), userF=new UserFragment();
+    private FrameLayout frameLayout1,frameLayout2,frameLayout3,frameLayout4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//      初始化下方菜单
         tab_1L = (LinearLayout) findViewById(R.id.tab_1);
         tab_2L = (LinearLayout) findViewById(R.id.tab_2);
         tab_3L = (LinearLayout) findViewById(R.id.tab_3);
@@ -55,16 +57,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
         tab_2L.setOnClickListener(this);
         tab_3L.setOnClickListener(this);
         tab_4L.setOnClickListener(this);
+//        绑定所有碎片容器
+        frameLayout1 =(FrameLayout) findViewById(R.id.fragment1);
+        frameLayout2 =(FrameLayout) findViewById(R.id.fragment2);
+        frameLayout3 =(FrameLayout) findViewById(R.id.fragment3);
+        frameLayout4 =(FrameLayout) findViewById(R.id.fragment4);
         //将所有碎片添加至activity，隐藏其他碎片，显示主页碎片
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment, locationF).commitAllowingStateLoss();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment, mapF).commitAllowingStateLoss();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment, userF).commitAllowingStateLoss();
-        getSupportFragmentManager().beginTransaction().hide(locationF).commitAllowingStateLoss();
-        getSupportFragmentManager().beginTransaction().hide(mapF).commitAllowingStateLoss();
-        getSupportFragmentManager().beginTransaction().hide(userF).commitAllowingStateLoss();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment, homeF).commitAllowingStateLoss();
-        getSupportFragmentManager().beginTransaction().show(homeF).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment1, homeF).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment2, locationF).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment3, mapF).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment4, userF).commitAllowingStateLoss();
+        frameLayout1.setVisibility(View.VISIBLE);
+        frameLayout2.setVisibility(View.GONE);
+        frameLayout3.setVisibility(View.GONE);
+        frameLayout4.setVisibility(View.GONE);
         tab_1L.setSelected(true);
+
 
 
     }
@@ -83,73 +91,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
         tab_3L.setSelected(false);
         tab_4L.setSelected(false);
         v.setSelected(true);
+        frameLayout1.setVisibility(View.GONE);
+        frameLayout2.setVisibility(View.GONE);
+        frameLayout3.setVisibility(View.GONE);
+        frameLayout4.setVisibility(View.GONE);
         switch (v.getId()) {
             case R.id.tab_1:
-                if (homeF == null) {
-                    homeF = new HomeFragment();
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment, homeF).commitAllowingStateLoss();
-                }
-                if (locationF != null)
-                    getSupportFragmentManager().beginTransaction().hide(locationF).commitAllowingStateLoss();
-                if (mapF != null)
-                    getSupportFragmentManager().beginTransaction().hide(mapF).commitAllowingStateLoss();
-                if (userF != null)
-                    getSupportFragmentManager().beginTransaction().hide(userF).commitAllowingStateLoss();
-                if (homeF != null)
-                    getSupportFragmentManager().beginTransaction().hide(homeF).commitAllowingStateLoss();
-                getSupportFragmentManager().beginTransaction().show(homeF).commitAllowingStateLoss();
-                HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                frameLayout1.setVisibility(View.VISIBLE);
+                HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment1);
                 fragment.scrollToTop();//每次显示页面，都要重新将滚动条滚动到顶部
-
                 break;
             case R.id.tab_2:
-                if (locationF == null) {
-                    locationF = new LocationFragment();
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment, locationF).commitAllowingStateLoss();
-                }
-                if (locationF != null)
-                    getSupportFragmentManager().beginTransaction().hide(locationF).commitAllowingStateLoss();
-                if (mapF != null)
-                    getSupportFragmentManager().beginTransaction().hide(mapF).commitAllowingStateLoss();
-                if (userF != null)
-                    getSupportFragmentManager().beginTransaction().hide(userF).commitAllowingStateLoss();
-                if (homeF != null)
-                    getSupportFragmentManager().beginTransaction().hide(homeF).commitAllowingStateLoss();
-                getSupportFragmentManager().beginTransaction().show(locationF).commitAllowingStateLoss();
-
+                frameLayout2.setVisibility(View.VISIBLE);
                 break;
             case R.id.tab_3:
-                if (mapF == null) {
-                    mapF = new GuideMapFragment();
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment, mapF).commitAllowingStateLoss();
-                }
-                if (locationF != null)
-                    getSupportFragmentManager().beginTransaction().hide(locationF).commitAllowingStateLoss();
-                if (userF != null)
-                    getSupportFragmentManager().beginTransaction().hide(userF).commitAllowingStateLoss();
-                if (homeF != null)
-                    getSupportFragmentManager().beginTransaction().hide(homeF).commitAllowingStateLoss();
-                getSupportFragmentManager().beginTransaction().show(mapF).commitAllowingStateLoss();
-
+                frameLayout3.setVisibility(View.VISIBLE);
                 break;
             case R.id.tab_4:
-                if (userF == null) {
-                    userF = new UserFragment();
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment, userF).commitAllowingStateLoss();
-                }
-                if (locationF != null)
-                    getSupportFragmentManager().beginTransaction().hide(locationF).commitAllowingStateLoss();
-                if (mapF != null)
-                    getSupportFragmentManager().beginTransaction().hide(mapF).commitAllowingStateLoss();
-                if (userF != null)
-                    getSupportFragmentManager().beginTransaction().hide(userF).commitAllowingStateLoss();
-                if (homeF != null)
-                    getSupportFragmentManager().beginTransaction().hide(homeF).commitAllowingStateLoss();
-                getSupportFragmentManager().beginTransaction().show(userF).commitAllowingStateLoss();
+                frameLayout4.setVisibility(View.VISIBLE);
                 break;
-
         }
-
 
     }
 
@@ -157,6 +118,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
     @Override
     protected void onResume() {
         super.onResume();
+        //登录信息确认
+//        Log.i("login","登录信息确认");
+        SharedPreferences sp = getSharedPreferences("travel_social_app_sharedPreferences",MODE_PRIVATE);
+        int isLogin = sp.getInt("user_isLogin",0);//取出用户登录标记
+        if(isLogin==1){
+            //刷新用户页面登录信息
+            reflashLoginInformation();
+
+        }
+//        定位
         initWidget();
         startGPSLocation();
 
@@ -234,7 +205,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
                     return;
                 }
             }else {
-                showToast("获取定位中");
+//                showToast("获取定位中");
 
             }
 
@@ -336,7 +307,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
     @Override
     public void toLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
-        startActivityForResult(intent,0);//向登录页跳转
+        startActivityForResult(intent,2);//向登录页跳转
     }
 
     @Override
@@ -346,23 +317,51 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
     }
 
     @Override
+    public void toUserSettingMainActivity() {
+        Intent intent = new Intent(this, UserSettingMainActivity.class);
+        startActivityForResult(intent,1);//向用户设置页跳转
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==0){//登录状态
-            if(resultCode==0){
+        if(requestCode==2){//登录状态
+            if(resultCode==1){//登录成功
 //                显示服务器返回的消息
                 showToast(data.getExtras().getString("LoginMessageFromSever"));
-            }else if(resultCode==1){//注册状态
+                //    刷新用户页面登录信息
+                reflashLoginInformation();
+
+            }else if(resultCode==2){//注册状态（注册成功）
                 // 显示服务器返回的消息
                 showToast(data.getExtras().getString("SigninMessageFromSever"));
+              //    刷新用户页面登录信息
+                reflashLoginInformation();
             }else{
                 Log.e("onActivityResult","Main Login 未定义状态");
             }
+        }else if(requestCode==1){ //退出登录状态
+            if(resultCode==1){//退出登录成功
+                //显示服务器返回的消息
+                showToast(data.getExtras().getString("LogoutMessageFromSever"));
+                // 改变页面用户昵称
+                UserFragment fragment = (UserFragment) getSupportFragmentManager().findFragmentById(R.id.fragment4);
+                assert fragment != null;
+                fragment.setUserName("登录获得更多体验");
+            }
         }
+    }
 
-
-
-
+//    刷新用户页面登录信息  昵称
+    public void reflashLoginInformation()
+    {
+//      改变用户页面用户昵称
+        SharedPreferences sp = getSharedPreferences("travel_social_app_sharedPreferences",MODE_PRIVATE);
+        String userName = sp.getString("user_name","");//取出用户登录标记
+        UserFragment fragment = (UserFragment) getSupportFragmentManager().findFragmentById(R.id.fragment4);
+        assert fragment != null;
+        Log.i("Username",userName);
+        fragment.setUserName(userName);
     }
 
 }

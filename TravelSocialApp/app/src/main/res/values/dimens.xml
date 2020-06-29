@@ -31,10 +31,10 @@
     <dimen name="user_picture">100dp</dimen>
 
     <!--    用户头像背景黑色色块高-->
-    <dimen name="user_bg_black">250dp</dimen>
+    <dimen name="user_bg_black">230dp</dimen>
 
     <!--    用户头像顶部距离= 用户头像背景黑色色块 - 用户头像边长/2 - 顶部导航栏高度-->
-    <dimen name="user_info_layout_marginTop">150dp</dimen>
+    <dimen name="user_info_layout_marginTop">130dp</dimen>
     <!--    用户头像顶部距离= 用户头像背景黑色色块 - 用户头像边长/2 -->
     <dimen name="other_user_info_layout_marginTop">200dp</dimen>
 

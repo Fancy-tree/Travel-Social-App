@@ -122,17 +122,21 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 try {//存储用户登录凭证
                     token = baseInternetMessage.getResultJsonObject().getString("token");
                     sp.putString("user_loginToken",token);
-                    Log.i("SharedPreferences","user_loginToken: "+token);
+                    Log.i("SharedPreferences","user_SignToken: "+token);
                 } catch (JSONException e) {
                     Log.e("SharedPreferences","用户注册凭证Json格式错误");
                     e.printStackTrace();
                 }
                 sp.apply();//
+                // 储存用户基本信息
+                sp.putString("user_name","昵称");//存储用户默认昵称
+                sp.apply();
+
                 Intent intent =  new Intent(SignInActivity.this,LoginActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("SigninMessageFromSever",baseInternetMessage.getMessage());
                 intent.putExtras(bundle);
-                setResult(0, intent);
+                setResult(2, intent);
 //                showToast(baseInternetMessage.getMessage());
                 finish();
             }

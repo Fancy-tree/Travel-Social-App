@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_user,null);
         return view;
     }
+    private TextView userName;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -31,7 +33,10 @@ public class UserFragment extends Fragment implements View.OnClickListener{
 
         view.findViewById(R.id.travel_diary).setOnClickListener(this);//旅行日志
         view.findViewById(R.id.user_head).setOnClickListener(this);//头像
-        view.findViewById(R.id.setting).setOnClickListener(this);//设置
+        view.findViewById(R.id.user_setting).setOnClickListener(this);//设置
+        userName = view.findViewById(R.id.user_name);//用户昵称
+
+//        初始化用户信息
 
     }
 
@@ -44,28 +49,40 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                 ToOtherActivity toOtherActivity = (ToOtherActivity)getActivity();
                 toOtherActivity.toLoginActivity();
 
-
             }else{//用户已登录
                 if(v.getId()==R.id.travel_diary){
                     ToOtherActivity toOtherActivity = (ToOtherActivity)getActivity();
                     toOtherActivity.toTravelDiaryActivity();
                 }
+                if(v.getId()==R.id.user_head){//用户头像
+                //   测试用
+//
+//                    SharedPreferences.Editor sp2 = getActivity().getSharedPreferences("travel_social_app_sharedPreferences",MODE_PRIVATE).edit();
+//                    sp2.putInt("user_isLogin",0);//存储用户登录状态
+//                    setUserName("登录获得更多体验");
+//                    sp2.apply();//
+
+                }else if(v.getId()==R.id.user_setting){
+                    ToOtherActivity toOtherActivity = (ToOtherActivity)getActivity();
+                    toOtherActivity.toUserSettingMainActivity();
+
+                }
 
             }
-        }
-
-        if(v.getId()==R.id.user_head){
-//            测试用
-            SharedPreferences.Editor sp = getActivity().getSharedPreferences("travel_social_app_sharedPreferences",MODE_PRIVATE).edit();
-            sp.putInt("user_isLogin",0);//存储用户登录状态
-            sp.apply();//
 
         }
+
     }
 
+//    跳转页面接口给Activity
     public interface ToOtherActivity
     {
         abstract public void toLoginActivity();
         abstract public void toTravelDiaryActivity();
+        abstract public void toUserSettingMainActivity();
+    }
+//    给Activity调用
+    public void setUserName(String name){
+        userName.setText(name);
     }
 }

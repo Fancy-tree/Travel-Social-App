@@ -1,6 +1,7 @@
 package com.example.travelsocialapp.model;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -9,8 +10,11 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.travelsocialapp.base.BaseInternetMessage;
+import com.example.travelsocialapp.base.C;
 import com.example.travelsocialapp.ui.TravelDiaryEditActivity;
 import com.example.travelsocialapp.util.ImgUtil;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,19 +26,27 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 //记录旅行日志所有的内容
 //提供一些打包，保存，读取操作
 public class TravelDiary {
     private String mtitle;//日志标题
     private Bitmap mbgimg;//日志背景
+    private String mbgimgUrl;//日志背景地址
+    public String getMbgimgUrl() { return mbgimgUrl; }
 
     private List<String> mContentList; //日志正文所有内容
     private List<Bitmap> mBitmapList;  //日志正文所有图片
     private List<Integer> misBitmap;  //日志正文内容项是否为图片
 
+
+
     private List<String> mPictureUrl;//从服务器获取所有图片的url
+    public List<String> getmPictureUrl() { return mPictureUrl; }
     private String mIncompletePictureSaveSDCardUri;//草稿图片暂存sd卡 文件夹地址
     private String mIncompleteTextSaveSDCardUri;//草稿文本信息暂存sd卡 文件夹地址
 
@@ -60,7 +72,6 @@ public class TravelDiary {
         mIncompleteTextSaveSDCardUri = context.getExternalFilesDir("Documents").toString()+"/traveldiary/saveIncomplete";
     }
 
-
     public String getMtitle() { return mtitle; }
     public List<String> getmContentList() {
         return mContentList;
@@ -74,8 +85,100 @@ public class TravelDiary {
     public Bitmap getMbgimg() { return mbgimg; }
 
 
+//    解析服务器数据: 刷新此对象(参数的json对象存储了完整的一个日志信息)
+    public void refreshTravelDiaryFromIntentJsonObject(JSONObject jsonObject,int hasContentList) throws JSONException {
+        JSONObject result = jsonObject;
+        this.mtitle=result.getString("title");
+//        this.mbgimg = ImgUtil.stringToBitmapImage(result.getString("titleimg"));
+        this.mbgimgUrl = result.getString("titleimg");
+        if(hasContentList==1){
+            JSONArray contentList = result.getJSONArray("contentList");
+            int imgCount = 0;//图片计数
+            for(int i=0;i<contentList.length();i++){
+                JSONObject item = new JSONObject();
+                item = contentList.getJSONObject(i);
+                JSONObject itemin = new JSONObject();
+                itemin.getJSONObject(i+1+"");
+                this.mContentList.clear();
+                this.mBitmapList.clear();
+                this.misBitmap.clear();
+                if(itemin.getString("type").equals("0")){
+//                如果是文本
+                    mContentList.add(itemin.getString("content"));
+                    misBitmap.add(0);
 
-    //将diary的文本信息（包括mContentList，misBitmap）   生成一条Json字符串
+                }else{
+                    //如果是图片
+                    mContentList.add("img");
+                    mPictureUrl.add(itemin.getString("content"));
+                    misBitmap.add(1);
+
+                }
+            }
+        }
+
+    }
+
+
+//    发送服务器：  得到能够发送给服务器的完整日志所有信息的Json字符串
+    public String getDiaryJsonStringForIntent(Context context)
+    {
+        String result = "";
+        int imgCount = 0;//图片下标计数
+        JSONArray ContentList = new JSONArray();
+        for(int i=0;i<mContentList.size();i++){
+            JSONObject item = new JSONObject();
+            if(misBitmap.get(i)==1){
+//                如果是图片
+                try {
+                    JSONObject itemin = new JSONObject();
+                    itemin.put("content",ImgUtil.bitmapImagetoString(mBitmapList.get(imgCount)));
+                    itemin.put("type","1");
+                    item.put(i+1+"",itemin);
+                } catch (JSONException e) {
+                    Log.e("TravelDiary","getDiaryJsonStringForIntent ContentList to Json wrong");
+                    e.printStackTrace();
+                }
+                imgCount++;
+
+            }else{
+//                如果是文字
+                try {
+                    JSONObject itemin = new JSONObject();
+                    itemin.put("content",mContentList.get(i));
+                    itemin.put("type","0");
+                    item.put(i+1+"",itemin);
+                } catch (JSONException e) {
+                    Log.e("TravelDiary","getDiaryJsonStringForIntent ContentList to Json wrong");
+                    e.printStackTrace();
+                }
+            }
+            ContentList.put(item);
+        }
+
+        JSONObject forResult = new JSONObject();
+        SharedPreferences sp = context.getSharedPreferences("travel_social_app_sharedPreferences",MODE_PRIVATE);
+        String user_loginToken = sp.getString("user_loginToken","");//取出用户登录标记
+        try {
+            forResult.put("token",user_loginToken);
+            forResult.put("title",mtitle);
+            if(mbgimg!=null){
+                forResult.put("titleimg",ImgUtil.bitmapImagetoString(mbgimg));
+            }else{
+                forResult.put("titleimg","");
+            }
+            forResult.put("contentList",ContentList);
+        } catch (JSONException e) {
+            Log.e("TravelDiary","getDiaryJsonStringForIntent ContentList to Json wrong");
+            e.printStackTrace();
+        }
+
+        result = BaseInternetMessage.produceInternetMassage(C.CODE_ReleaseDiary,forResult);
+        return result;
+    }
+
+
+    //保存至sd卡： 将diary的文本信息（包括mContentList，misBitmap）   生成一条Json字符串
     public String getDiaryJsonString(){
         String str = "";
         //遍历mContentList 将所有项以string格式放入JSONArray
@@ -88,7 +191,7 @@ public class TravelDiary {
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.e("TravelDiary","ContentList to Json wrong");
+                Log.e("TravelDiary","getDiaryJsonString ContentList to Json wrong");
             }
         }
         //遍历misBitmap 将所有项以string格式放入JSONArray
@@ -121,7 +224,7 @@ public class TravelDiary {
     }
 
 
-    //解析符合格式存储TravelDiary的JsonString,重置对象文本信息，（包括mContentList和misBitmap）
+    //保存至sd卡： 解析符合格式存储TravelDiary的JsonString,重置对象文本信息，（包括mContentList和misBitmap）
     private void reCreateTravelDiaryText(String jsonString){
         mContentList.clear();
         misBitmap.clear();

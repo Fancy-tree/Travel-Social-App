@@ -48,4 +48,34 @@
 
     </RelativeLayout>
 
+    <ProgressBar
+        android:id="@+id/travel_diary_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:visibility="gone"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/travel_diary_my"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        />
+
+<!--    <TextView-->
+<!--        android:id="@+id/travel_diary_nomore"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="到底啦~"-->
+<!--        android:visibility="gone"-->
+<!--        />-->
+
+
+
+
 </LinearLayout>

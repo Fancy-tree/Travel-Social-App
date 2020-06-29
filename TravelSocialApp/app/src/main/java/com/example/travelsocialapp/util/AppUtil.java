@@ -2,6 +2,7 @@ package com.example.travelsocialapp.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.util.Log;
 import android.view.Display;
@@ -12,11 +13,28 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.example.travelsocialapp.model.User;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//未分类的工具
+//未分类的工具 和伪全局变量
 public class AppUtil {
+
+
+    //    伪全局变量
+    //暂存发布日志信息，便于退出页面发送
+    private static String releaseDiaryJsonString="";
+    private static String releaseDiarytitle="";
+    private static Bitmap releaseDiarytitleimg;
+    public static String getReleaseDiaryJsonString() {return releaseDiaryJsonString; }
+    public static void setReleaseDiaryJsonString(String releaseDiaryJsonString) { AppUtil.releaseDiaryJsonString = releaseDiaryJsonString; }
+    public static String getReleaseDiarytitle() { return releaseDiarytitle; }
+    public static void setReleaseDiarytitle(String releaseDiarytitle) { AppUtil.releaseDiarytitle = releaseDiarytitle; }
+    public static Bitmap getReleaseDiarytitleimg() { return releaseDiarytitleimg; }
+    public static void setReleaseDiarytitleimg(Bitmap releaseDiarytitleimg) { AppUtil.releaseDiarytitleimg = releaseDiarytitleimg; }
+
+
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
@@ -50,6 +68,7 @@ public class AppUtil {
         wm.getDefaultDisplay().getMetrics(dm);
         return dm.heightPixels;
     }
+
 
 
 //    正则验证手机号格式

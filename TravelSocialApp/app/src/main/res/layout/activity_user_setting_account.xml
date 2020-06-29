@@ -154,6 +154,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/user_setting_account_logout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_button_height"
         android:background="@color/tab_bg_gray"
