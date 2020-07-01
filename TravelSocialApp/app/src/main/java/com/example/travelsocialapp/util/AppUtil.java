@@ -23,16 +23,8 @@ public class AppUtil {
 
 
     //    伪全局变量
-    //暂存发布日志信息，便于退出页面发送
-    private static String releaseDiaryJsonString="";
-    private static String releaseDiarytitle="";
-    private static Bitmap releaseDiarytitleimg;
-    public static String getReleaseDiaryJsonString() {return releaseDiaryJsonString; }
-    public static void setReleaseDiaryJsonString(String releaseDiaryJsonString) { AppUtil.releaseDiaryJsonString = releaseDiaryJsonString; }
-    public static String getReleaseDiarytitle() { return releaseDiarytitle; }
-    public static void setReleaseDiarytitle(String releaseDiarytitle) { AppUtil.releaseDiarytitle = releaseDiarytitle; }
-    public static Bitmap getReleaseDiarytitleimg() { return releaseDiarytitleimg; }
-    public static void setReleaseDiarytitleimg(Bitmap releaseDiarytitleimg) { AppUtil.releaseDiarytitleimg = releaseDiarytitleimg; }
+    static public int isreleaseDiary = 0;//  发布旅行日志标记,首页再刷新
+
 
 
 

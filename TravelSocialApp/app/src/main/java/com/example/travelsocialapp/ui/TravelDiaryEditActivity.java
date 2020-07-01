@@ -472,10 +472,11 @@ public class TravelDiaryEditActivity extends BaseActivity implements View.OnClic
             vh = travel_diary_bg_picture.getHeight();//获取ImageView高度
 
 //            int scaleFactor  = Math.min(iw/vw,ih/vh);
-            int scaleFactor = 4;
+            int scaleFactor = 2;
             option.inJustDecodeBounds = false;//关闭设置选项
             option.inSampleSize = scaleFactor;//设置缩小比例，例如3，将缩小为3/1
 
+//            得到的图片大小是已被缩小的原图
             tmpbgbitmap = BitmapFactory.decodeFile(imagePath,option);
             travel_diary_bg_picture.setImageBitmap(tmpbgbitmap);
 
@@ -499,8 +500,8 @@ public class TravelDiaryEditActivity extends BaseActivity implements View.OnClic
         intent.putExtra("aspectY", 3);
         intent.putExtra("scale", true);
         // outputX outputY 是裁剪图片宽高 不设置即为原始值
-//        intent.putExtra("outputX", 400);
-//        intent.putExtra("outputY", 300);
+        intent.putExtra("outputX", 1600);
+        intent.putExtra("outputY", 1200);
         //设置了true的话直接返回bitmap，可能会很占内存
         intent.putExtra("return-data", false);
         //设置输出的格式
@@ -521,201 +522,5 @@ public class TravelDiaryEditActivity extends BaseActivity implements View.OnClic
 }
 
 
-//通过相册获得图片，展示在imageview
-//public class TravelDiaryEditActivity extends BaseActivity implements View.OnClickListener{
-//    Uri imgUri;//创建uri对象
-//    ImageView imv;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_travel_diary_edit);
-//        imv = (ImageView)findViewById(R.id.imageView);
-//        findViewById(R.id.button).setOnClickListener(this);
-//    }
-//
-//    //唤出相册
-//    public void onGet(View v){
-//        Intent it = new Intent(Intent.ACTION_GET_CONTENT);//动作设为选取内容
-//        it.setType("image/*");//设置选取的媒体类型为:所有类型的图片
-//        startActivityForResult(it,101);
-//
-//    }
-//
-//    //处理Intent返回结果（将刚拍的照片显示到ImageView）
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(resultCode == Activity.RESULT_OK && requestCode == 101){
-//
-//            //相册图片路径不同版本有不同取法
-//            // 判断手机系统版本号
-//            if (Build.VERSION.SDK_INT >= 19) {
-//                // 4.4及以上系统使用这个方法处理图片
-//                handleImageOnKitKat(data);
-//            }
-//            else {
-//                // 4.4以下系统使用这个方法处理图片
-//                handleImageBeforeKitKat(data);
-//            }
-//
-//        }else{
-//            showToast("没拍到照片");
-//
-//        }
-//    }
-//
-//
-//    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-//    private void handleImageOnKitKat(Intent data) {
-//        String imagePath = null;
-//        Uri uri = data.getData();
-//        Log.d("TAG", "handleImageOnKitKat: uri is " + uri);
-//
-//        if (DocumentsContract.isDocumentUri(this, uri)) {
-//            // 如果是document类型的Uri，则通过document id处理
-//            String docId = DocumentsContract.getDocumentId(uri);
-//            if("com.android.providers.media.documents".equals(uri.getAuthority())) {
-//                String id = docId.split(":")[1]; // 解析出数字格式的id
-//                String selection = MediaStore.Images.Media._ID + "=" + id;
-//                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
-//            }
-//            else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
-//                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
-//                imagePath = getImagePath(contentUri, null);
-//            }
-//        }
-//        else if ("content".equalsIgnoreCase(uri.getScheme())) {
-//            // 如果是content类型的Uri，则使用普通方式处理
-//            imagePath = getImagePath(uri, null);
-//        }
-//        else if ("file".equalsIgnoreCase(uri.getScheme())) {
-//            // 如果是file类型的Uri，直接获取图片路径即可
-//            imagePath = uri.getPath();
-//        }
-//        displayImage(imagePath); // 根据图片路径显示图片
-//    }
-//
-//    private void handleImageBeforeKitKat(Intent data) {
-//        Uri uri = data.getData();
-//        String imagePath = getImagePath(uri, null);
-//        displayImage(imagePath);
-//    }
-//
-//
-//    private String getImagePath(Uri uri, String selection) {
-//        String path = null;
-//        // 通过Uri和selection来获取真实的图片路径
-//        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
-//        if (cursor != null) {
-//            if (cursor.moveToFirst()) {
-//                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-//            }
-//            cursor.close();
-//        }
-//        return path;
-//    }
-//
-//    private void displayImage(String imagePath) {
-//        if (imagePath != null) {
-//            int iw,ih,vw,vh;
-//            BitmapFactory.Options option = new BitmapFactory.Options();//创建选项对象
-//            option.inJustDecodeBounds = true; //设置选项：只读取图像文件信息而不载入图像文件
-//            BitmapFactory.decodeFile(imagePath,option);//读取图像文件信息存入option中
-//
-//            iw = option.outWidth;//图像宽度
-//            ih = option.outHeight;//图像高度
-//            vw = imv.getWidth();//获取ImageView宽度
-//            vh = imv.getHeight();//获取ImageView高度
-//
-//            int scaleFactor  = Math.min(iw/vw,ih/vh);
-//            option.inJustDecodeBounds = false;//关闭设置选项
-//            option.inSampleSize = scaleFactor;//设置缩小比例，例如3，将缩小为3/1
-//
-//            Bitmap bitmap = BitmapFactory.decodeFile(imagePath,option);
-//            imv.setImageBitmap(bitmap);
-//        }
-//        else {
-//            showToast("failed to get image");
-//        }
-//    }
-//
-//
-//    @Override
-//    public void onClick(View v) {
-//        if(v.getId()==R.id.button){
-//            onGet(v);
-//        }
-//    }
-//}
 
-
-//使用相机拍照，存储，显示图片
-//public class TravelDiaryEditActivity extends BaseActivity implements View.OnClickListener{
-//    Uri imgUri;//创建uri对象
-//    ImageView imv;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_travel_diary_edit);
-//        imv = (ImageView)findViewById(R.id.imageView);
-//        findViewById(R.id.button).setOnClickListener(this);
-//    }
-//
-//    //唤出相机
-//    public void onGet(View v){
-//        ///storage/emulated/0/Android/data/com.example.travelsocialapp/files/Pictures/1586606242418.jpg
-//        String path = TravelDiaryEditActivity.this.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString();//$rootDir/Andorid/data/包名/picture
-//        String fname = System.currentTimeMillis() + ".jpg";//利用当前时间组合出不重复的文件名
-//        imgUri = Uri.parse("file://"+path+"/"+fname);//定义uri对象
-////        Log.i("uri",imgUri.toString());
-//        Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        it.putExtra(MediaStore.EXTRA_OUTPUT,imgUri);//传入目录，它会帮你存到里面去
-//        startActivityForResult(it,100);
-//
-//    }
-//
-//    //处理Intent返回结果（将刚拍的照片显示到ImageView）
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(resultCode == Activity.RESULT_OK && requestCode == 100){
-//// //           Bundle extras = data.getExtras(); //将Intent的附加数据转为Bundle对象
-//// //          Bitmap bmp =(Bitmap) extras.get("data");//将intent对象传来的bitmap格式数据取出
-////            Bitmap bmp = BitmapFactory.decodeFile(imgUri.getPath());//读取指定路径文件，并转换为bitmap对象
-////            ImageView imv = (ImageView)findViewById(R.id.imageView);
-////            imv.setImageBitmap(bmp);
-//            showImg();
-//        }else{
-//            showToast("没拍到照片");
-//
-//        }
-//    }
-//
-//    //小尺寸从sd卡载入图片，避免储存溢出
-//    void showImg(){
-//        int iw,ih,vw,vh;
-//        BitmapFactory.Options option = new BitmapFactory.Options();//创建选项对象
-//        option.inJustDecodeBounds = true; //设置选项：只读取图像文件信息而不载入图像文件
-//        BitmapFactory.decodeFile(imgUri.getPath(),option);//读取图像文件信息存入option中
-//        iw = option.outWidth;//图像宽度
-//        ih = option.outHeight;//图像高度
-//        vw = imv.getWidth();//获取ImageView宽度
-//        vh = imv.getHeight();//获取ImageView高度
-//
-//        int scaleFactor  = Math.min(iw/vw,ih/vh);
-//        option.inJustDecodeBounds = false;//关闭设置选项
-//        option.inSampleSize = scaleFactor;//设置缩小比例，例如3，将缩小为3/1
-//
-//        Bitmap bmp = BitmapFactory.decodeFile(imgUri.getPath(),option);//真正载入文件
-//        imv.setImageBitmap(bmp);
-//
-//    }
-//
-//    @Override
-//    public void onClick(View v) {
-//        if(v.getId()==R.id.button){
-//            onGet(v);
-//        }
-//    }
-//}
 

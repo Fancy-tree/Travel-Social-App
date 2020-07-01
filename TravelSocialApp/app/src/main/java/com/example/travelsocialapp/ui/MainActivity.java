@@ -33,6 +33,7 @@ import com.example.travelsocialapp.ui.Fragment.GuideMapFragment;
 import com.example.travelsocialapp.ui.Fragment.HomeFragment;
 import com.example.travelsocialapp.ui.Fragment.LocationFragment;
 import com.example.travelsocialapp.ui.Fragment.UserFragment;
+import com.example.travelsocialapp.util.AppUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -100,6 +101,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,L
                 frameLayout1.setVisibility(View.VISIBLE);
                 HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment1);
                 fragment.scrollToTop();//每次显示页面，都要重新将滚动条滚动到顶部
+                if(AppUtil.isreleaseDiary==1){
+                    fragment.reflushDiary();
+                }
                 break;
             case R.id.tab_2:
                 frameLayout2.setVisibility(View.VISIBLE);

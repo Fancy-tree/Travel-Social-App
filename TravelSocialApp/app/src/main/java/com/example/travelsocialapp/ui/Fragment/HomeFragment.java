@@ -28,6 +28,7 @@ import com.example.travelsocialapp.base.C;
 import com.example.travelsocialapp.model.TravelDiary;
 import com.example.travelsocialapp.ui.Adapter.StaggeredGridAdapter;
 import com.example.travelsocialapp.ui.View.MyScrollView;
+import com.example.travelsocialapp.util.AppUtil;
 import com.example.travelsocialapp.util.IntentUtil;
 
 import org.json.JSONException;
@@ -50,6 +51,7 @@ public class HomeFragment extends Fragment {
     private MyScrollView home_scrollS;
     private StaggeredGridAdapter staggeredGridAdapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -77,15 +79,6 @@ public class HomeFragment extends Fragment {
         if(getActivity()!=null){
             mtravel_diary_showR.setAdapter(staggeredGridAdapter);
         }
-
-        //全局布局状态改变或者视图树中视图的*可见性*发生变化时会进行调用,不然获取的值都是0
-//        ViewTreeObserver viewTreeObserver = mtravel_diary_showR.getViewTreeObserver();
-//        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
-//            @Override
-//            public void onGlobalLayout() {
-//                if(canreflush==1)reflushshow(); //如果不设置canreflush，它会随时刷新，间隔很短，拖慢速度
-//            }
-//        });
 
 
         home_progress = view.findViewById(R.id.home_progress);
@@ -118,30 +111,6 @@ public class HomeFragment extends Fragment {
 
 
     }
-
-//    private int canreflush=1;
-////    刷新旅行日志栏,根据内容个数，改变瀑布流高度
-//    private void reflushshow(){
-//        staggeredGridAdapter.notifyDataSetChanged();
-//
-//        //根据内容个数改变瀑布流高度，使得所有内容都能够显示在内
-//        int itemCount = staggeredGridAdapter.getItemCount();
-//        if (itemCount >0){
-//            LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) mtravel_diary_showR.getLayoutParams();
-//            ArrayList<Integer> oneitemheight = staggeredGridAdapter.getOneItemHeight();
-////            int total = ;
-////            params.height = staggeredGridAdapter.getOneItemHeight()*(itemCount/2); //粗略计算总高度// 接收单位为px
-//
-//            Log.i("now height",String.valueOf(params.height));
-//            if(params.height!=0){ //我不知道组件何时能获取到非0值，所以只能刷新到有效值为止
-//                mtravel_diary_showR.setLayoutParams(params);
-//                canreflush=0;
-//            }
-//
-//        }
-//
-//        staggeredGridAdapter.setOneItemHeight(new ArrayList<Integer>(){});//下一次重新计算总高度
-//    }
 
     ArrayList<TravelDiary> travelDiaries = new ArrayList<TravelDiary>();// 我的所有日志列表
     //异步请求获取我的日志
@@ -302,6 +271,20 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+   //给activity调用,刷出最新日志
+    public void reflushDiary(){
+        if(AppUtil.isreleaseDiary==1){
+            travelDiaries.clear();
+            labelNumber=1;
+            AppUtil.isreleaseDiary=0;
+            // 向服务器获取更多我的旅游日志信息（最多5个）
+            HomeFragment.InternetRequestReleaseDiaryHome task = new HomeFragment.InternetRequestReleaseDiaryHome();
+            task.execute(C.intentRequestReleaseDiaryHomeUrl);
+
+        }
+    }
+
     public interface xxx{ //提供给activity实现，就可以在fragment里控制activity
 
     }
@@ -317,6 +300,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.i("Home","resume");
+
 
     }
 

@@ -265,6 +265,8 @@ public class TravelDiaryActivity extends BaseActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1){//编写旅行日志
             if(resultCode==1){//发布成功
+//                通知首页刷新
+                AppUtil.isreleaseDiary = 1;
 //                从头开始刷新
                 travelDiaries.clear();
                 labelNumber=1;

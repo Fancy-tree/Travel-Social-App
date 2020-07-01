@@ -6,11 +6,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.example.travelsocialapp.base.BaseInternetMessage;
 import com.example.travelsocialapp.base.C;
 import com.example.travelsocialapp.model.TravelDiary;
 import com.example.travelsocialapp.ui.View.PictureTextEditorView;
+import com.example.travelsocialapp.util.AppUtil;
 import com.example.travelsocialapp.util.ImgUtil;
 import com.example.travelsocialapp.util.IntentUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -58,6 +61,13 @@ public class TravelDiaryShowDetailMyActivity extends BaseActivity {
         //异步请求获取我的一篇日志
         TravelDiaryShowDetailMyActivity.InternetRequestMyReleaseDiaryOne task = new TravelDiaryShowDetailMyActivity.InternetRequestMyReleaseDiaryOne();
         task.execute(C.intentRequestMyReleaseDiaryOne);
+
+
+//        根据屏幕宽度，计算图片组件高度4:3
+        int SreenWidthpx = AppUtil.getSreenWidth(this);
+        LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) travel_diary_show_detail_bg_img.getLayoutParams();
+        params.height = SreenWidthpx*3/4; //根据屏幕宽度设置图片宽度 接收单位为px
+        travel_diary_show_detail_bg_img.setLayoutParams(params);
     }
 
 

@@ -44,9 +44,10 @@
 
             <ImageView
                 android:id="@+id/travel_diary_show_detail_bg_img"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 app:srcCompat="@color/undefine_picture_gray" />
 
 <!--            <RelativeLayout-->

@@ -72,6 +72,21 @@ public class StaggeredGridAdapter extends androidx.recyclerview.widget.RecyclerV
         ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
         layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
 
+
+        // 图片高度随机设置  1:1 或 3:4
+        int max=10,min=1;
+        int random = (int) (Math.random()*(max-min)+min);
+        LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) holder.travel_diary_show_bg_pictureI.getLayoutParams();
+        int height = params.height;
+        int width = params.width;
+        if(random<5){
+            params.height =width; //根据屏幕宽度设置图片宽度 接收单位为px
+        }else{
+            params.height =width*4/3;
+        }
+        holder.travel_diary_show_bg_pictureI.setLayoutParams(params);
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

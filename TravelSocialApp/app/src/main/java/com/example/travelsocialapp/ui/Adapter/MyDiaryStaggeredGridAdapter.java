@@ -46,6 +46,9 @@ public class MyDiaryStaggeredGridAdapter extends androidx.recyclerview.widget.Re
 
     }
 
+//    暂存随机高度表，防止刷新乱序
+//    private ArrayList<Integer> randomHeight = new ArrayList<Integer>();
+
 
     @NonNull
     @Override
@@ -62,9 +65,26 @@ public class MyDiaryStaggeredGridAdapter extends androidx.recyclerview.widget.Re
 //        我也不知道为什么，这么写瀑布流就不会错乱太严重
         if(!(travelDiaries.get(position).getMbgimgUrl()).equals(holder.travel_diary_show_bg_pictureI.getTag())) {
             holder.travel_diary_show_bg_pictureI.setTag(travelDiaries.get(position).getMbgimgUrl());
+
             ImageLoader.getInstance().displayImage(C.intentUrl+travelDiaries.get(position).getMbgimgUrl(), holder.travel_diary_show_bg_pictureI);
+
         }
 
+        // 图片高度随机设置  1:1 或 3:4
+        int max=10,min=1;
+        int random = (int) (Math.random()*(max-min)+min);
+        LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) holder.travel_diary_show_bg_pictureI.getLayoutParams();
+        int height = params.height;
+        int width = params.width;
+        if(random<5){
+            params.height =width; //根据屏幕宽度设置图片宽度 接收单位为px
+        }else{
+            params.height =width*4/3;
+        }
+        holder.travel_diary_show_bg_pictureI.setLayoutParams(params);
+
+
+    //点击事件
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
