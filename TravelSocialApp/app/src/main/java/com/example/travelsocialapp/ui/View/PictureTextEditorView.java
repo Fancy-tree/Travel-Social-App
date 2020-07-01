@@ -86,14 +86,17 @@ public class PictureTextEditorView extends EditText {
         this.setText("");
         int count=0;//使用图片计数
         if (ContentList.size() > 0) {
+//            Log.i("refreshContentListsize",ContentList.size()+"");
             for (int i=0; i<ContentList.size();i++) {
                 if(isBitmap.get(i)==0){
                     //是文本
                     String ss = ContentList.get(i);
                     ss = ss.replaceAll(mNewLineTag,"\n");//将换行符特殊符号还原
                     append(ss);
+//                    Log.i("refresh","0");
 
                 }else {
+//                    Log.i("refresh","1");
                     //是图片
                     Bitmap bitmap = BitmapList.get(count);
                     count++;

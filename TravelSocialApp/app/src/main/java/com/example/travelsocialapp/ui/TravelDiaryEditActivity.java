@@ -296,7 +296,7 @@ public class TravelDiaryEditActivity extends BaseActivity implements View.OnClic
                     showToast(baseInternetMessage.getMessage());
                 }
             }
-            travel_diary_edit_progressBar.setVisibility(View.GONE);
+            travel_diary_edit_progressBar.setVisibility(View.INVISIBLE);
         }
     }
 

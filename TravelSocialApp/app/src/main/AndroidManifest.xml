@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.UserSettingAccountActivity"></activity>
+        <activity android:name=".ui.TravelDiaryShowDetailMyActivity"></activity>
+        <activity android:name=".ui.UserSettingAccountActivity" />
         <activity android:name=".ui.UserSettingMainActivity" />
         <activity android:name=".ui.SignInActivity" />
         <activity android:name=".ui.SearchCityActivity" />

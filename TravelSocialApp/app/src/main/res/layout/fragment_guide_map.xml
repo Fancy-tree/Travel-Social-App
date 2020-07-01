@@ -28,8 +28,9 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:srcCompat="@color/undefine_picture_gray" />
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/luxiantuhaibao" />
 
 
             <LinearLayout

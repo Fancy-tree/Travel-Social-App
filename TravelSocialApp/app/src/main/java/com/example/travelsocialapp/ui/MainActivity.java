@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener,LocationListener,UserFragment.ToOtherActivity{
+public class MainActivity extends BaseActivity implements View.OnClickListener,LocationListener,UserFragment.ToOtherActivity {
     private LinearLayout tab_1L, tab_2L, tab_3L, tab_4L;
     private Fragment homeF= new HomeFragment(), locationF= new LocationFragment(), mapF=new GuideMapFragment(), userF=new UserFragment();
     private FrameLayout frameLayout1,frameLayout2,frameLayout3,frameLayout4;

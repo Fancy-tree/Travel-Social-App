@@ -12,6 +12,7 @@ package com.example.travelsocialapp.base;
 //user_name:用户昵称String
 
 // serial_number:显示我的旅行日志时，服务器需要的序号Int
+//serial_number_home:显示首页旅行日志时，服务器需要的序号Int
 
 import java.util.ArrayList;
 
@@ -24,7 +25,9 @@ public final class C {
     public static final String CODE_logout	= "103";//请求退出登录
 
     public static final String CODE_ReleaseDiary	= "201";//请求发布旅行日志
-    public static final String CODE_RequestMyDiary	= "202";//请求获取我的旅行日志
+    public static final String CODE_RequestMyDiary	= "202";//请求获取我的旅行日志集合
+    public static final String CODE_RequestMyDiaryOne	= "203";//请求获取我的一篇旅行日志
+    public static final String CODE_RequestDiaryHome	= "204";//请求获取旅行日志集合(首页)
 
 //    服务器返回code
     public static final String CODE_loginSuccess= "102";//登录成功
@@ -33,6 +36,8 @@ public final class C {
 
     public static final String CODE_ReleaseDiarySuccess	= "202";//请求发布旅行日志成功
     public static final String CODE_RequestMyDiarySuccess	= "204";//请求获取我的旅行日志成功
+    public static final String CODE_RequestMyDiaryOneSuccess = "206";//请求获取我的一篇旅行日志成功
+    public static final String CODE_RequestDiaryHomeSuccess = "208";//请求获取旅行日志集合(首页)成功
 
 //    服务器地址
     public static final String intentUrl = "http://192.168.43.132:80";
@@ -48,8 +53,9 @@ public final class C {
 
 //    发布旅行日志地址
     public static final String intentReleaseDiaryUrl = intentUrl+"/Travel2/tp5/re_travel_log";//发布旅行日志
-    public static final String intentRequestMyReleaseDiaryUrl = intentUrl+"/Travel2/tp5/out_travel_log";//请求我的旅行日志
-
+    public static final String intentRequestMyReleaseDiaryUrl = intentUrl+"/Travel2/tp5/out_personal_log";//请求我的旅行日志集合
+    public static final String intentRequestMyReleaseDiaryOne = intentUrl+"/Travel2/tp5/out_personal_log";//请求获取我的一篇旅行日志
+    public static final String intentRequestReleaseDiaryHomeUrl = intentUrl+"/Travel2/tp5/out_travel_log";//请求获取旅行日志(首页)
 
 
     //默认通用城市列表

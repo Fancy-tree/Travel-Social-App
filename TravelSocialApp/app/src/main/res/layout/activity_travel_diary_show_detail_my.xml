@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.TravelDiaryShowDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_tab_height"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/travel_diary_show_detail_exit"
+            android:layout_width="@dimen/top_tab_icon_size"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back"
+            android:scaleType="centerCrop" />
+
+
+    </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/travel_diary_show_detail_progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/travel_diary_show_detail_bg_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                app:srcCompat="@color/undefine_picture_gray" />
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/travel_diary_show_detail_user"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="10dp">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/travel_diary_show_detail_user_head"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_alignParentLeft="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    app:srcCompat="@drawable/userhead" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView4"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_toRightOf="@+id/travel_diary_show_detail_user_head"-->
+<!--                    android:text="兔兔" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    app:srcCompat="@drawable/more" />-->
+
+<!--            </RelativeLayout>-->
+
+            <TextView
+                android:id="@+id/travel_diary_show_detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                style="@style/TitleText"
+                android:text="标题" />
+
+
+<!--  android:layout_height="wrap_content" 组件高度适应内容-->
+                <com.example.travelsocialapp.ui.View.PictureTextEditorView
+                    android:id="@+id/travel_diary_show_detail_content"
+                    android:gravity="top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textSize="@dimen/middle_textsize"
+                    android:textColor="@color/black"
+                    android:background="@null"
+                    android:paddingHorizontal="20dp"
+                    android:text="正文" />
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

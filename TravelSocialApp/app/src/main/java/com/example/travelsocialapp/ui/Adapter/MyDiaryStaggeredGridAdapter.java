@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.travelsocialapp.R;
 import com.example.travelsocialapp.base.C;
 import com.example.travelsocialapp.model.TravelDiary;
+import com.example.travelsocialapp.ui.TravelDiaryShowDetailActivity;
+import com.example.travelsocialapp.ui.TravelDiaryShowDetailMyActivity;
 import com.example.travelsocialapp.util.AppUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -45,7 +47,6 @@ public class MyDiaryStaggeredGridAdapter extends androidx.recyclerview.widget.Re
     }
 
 
-
     @NonNull
     @Override
     public MyDiaryStaggeredGridAdapter.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,7 +55,7 @@ public class MyDiaryStaggeredGridAdapter extends androidx.recyclerview.widget.Re
 
 
     @Override
-    public void onBindViewHolder(@NonNull MyDiaryStaggeredGridAdapter.LinearViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyDiaryStaggeredGridAdapter.LinearViewHolder holder, final int position) {
         String title = travelDiaries.get(position).getMtitle();
         holder.travel_diary_show_title.setText(title);
 
@@ -63,6 +64,15 @@ public class MyDiaryStaggeredGridAdapter extends androidx.recyclerview.widget.Re
             holder.travel_diary_show_bg_pictureI.setTag(travelDiaries.get(position).getMbgimgUrl());
             ImageLoader.getInstance().displayImage(C.intentUrl+travelDiaries.get(position).getMbgimgUrl(), holder.travel_diary_show_bg_pictureI);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mcontext, TravelDiaryShowDetailMyActivity.class);
+                intent.putExtra("lid",travelDiaries.get(position).getLid());
+                mcontext.startActivity(intent);
+            }
+        });
 
     }
 

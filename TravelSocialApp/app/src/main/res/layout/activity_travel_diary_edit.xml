@@ -69,7 +69,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
     <!--    使按钮始终悬浮在输入法上方的布局方式-->
 <!--   android:fillViewport="true"使内部组件 match_parent。在内部组件里设置是没有用的-->

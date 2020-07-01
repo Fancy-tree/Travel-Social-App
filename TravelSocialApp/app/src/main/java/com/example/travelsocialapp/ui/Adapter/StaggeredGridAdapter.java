@@ -17,9 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travelsocialapp.R;
+import com.example.travelsocialapp.base.C;
+import com.example.travelsocialapp.model.TravelDiary;
 import com.example.travelsocialapp.ui.TravelDiaryShowDetailActivity;
 import com.example.travelsocialapp.util.AppUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -30,16 +34,18 @@ import java.util.Vector;
 public class StaggeredGridAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<StaggeredGridAdapter.LinearViewHolder>{
 
     private Context mcontext;
+    private ArrayList<TravelDiary> travelDiaries=new ArrayList<TravelDiary>();// 我的所有日志列表
+    public void setTravelDiaries(ArrayList<TravelDiary> travelDiaries) { this.travelDiaries = travelDiaries; }
 
     //内容的高度
-    private int oneItemHeight=0;
-    public int getOneItemHeight() {
+    private ArrayList<Integer> oneItemHeight=new ArrayList<Integer>();
+    public ArrayList<Integer> getOneItemHeight() {
         return oneItemHeight;
     }
-
-    public void setOneItemHeight(int allItemHeight) {
+    public void setOneItemHeight(ArrayList<Integer> allItemHeight) {
         this.oneItemHeight = allItemHeight;
     }
+
     public StaggeredGridAdapter(Context context){
         this.mcontext = context;
     }
@@ -54,16 +60,18 @@ public class StaggeredGridAdapter extends androidx.recyclerview.widget.RecyclerV
     @Override
     public void onBindViewHolder(@NonNull LinearViewHolder holder, final int position) {//操作控件
 
-        if(position % 2 !=0){ //奇数
-            holder.travel_diary_show_bg_pictureI.setImageResource(R.drawable.example1);
-            if(holder.travel_diary_show_father_linearlayout.getHeight()>oneItemHeight){
-                oneItemHeight = holder.travel_diary_show_father_linearlayout.getHeight();
-            }
-//            allItemHeight =holder.travel_diary_show_father_linearlayout.getHeight();
+        String title = travelDiaries.get(position).getMtitle();
+        holder.travel_diary_show_title.setText(title);
 
-        }else{//偶数
-            holder.travel_diary_show_bg_pictureI.setImageResource(R.drawable.example2);
+//        我也不知道为什么，这么写瀑布流就不会错乱太严重
+        if(!(travelDiaries.get(position).getMbgimgUrl()).equals(holder.travel_diary_show_bg_pictureI.getTag())) {
+            holder.travel_diary_show_bg_pictureI.setTag(travelDiaries.get(position).getMbgimgUrl());
+            ImageLoader.getInstance().displayImage(C.intentUrl+travelDiaries.get(position).getMbgimgUrl(), holder.travel_diary_show_bg_pictureI);
         }
+        oneItemHeight.add(holder.travel_diary_show_father_linearlayout.getHeight());
+        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+        layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,21 +80,21 @@ public class StaggeredGridAdapter extends androidx.recyclerview.widget.RecyclerV
 
             }
         });
-//        Log.i("item height",String.valueOf(holder.travel_diary_show_father_linearlayout.getHeight()));
-
 
     }
 
 
     @Override
     public int getItemCount() {
-        return 20; //列表长度
+        return travelDiaries.size(); //列表长度
     }
 
 
     class LinearViewHolder extends RecyclerView.ViewHolder{//绑定控件
         ImageView travel_diary_show_bg_pictureI;
         LinearLayout travel_diary_show_father_linearlayout;
+        TextView travel_diary_show_title;
+        TextView travel_diary_show_user_name;
 
 
         public LinearViewHolder(@NonNull View itemView) {
@@ -95,6 +103,9 @@ public class StaggeredGridAdapter extends androidx.recyclerview.widget.RecyclerV
 
             travel_diary_show_bg_pictureI = (ImageView)itemView.findViewById(R.id.travel_diary_show_bg_picture);
             int SreenWidthpx = AppUtil.getSreenWidth(mcontext);
+
+            travel_diary_show_title = itemView.findViewById(R.id.travel_diary_show_title);
+            travel_diary_show_user_name = itemView.findViewById(R.id.travel_diary_show_user_name);
 
             LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) travel_diary_show_bg_pictureI.getLayoutParams();
             params.width = SreenWidthpx/2 -AppUtil.dip2px(mcontext,10); //根据屏幕宽度设置图片宽度 接收单位为px

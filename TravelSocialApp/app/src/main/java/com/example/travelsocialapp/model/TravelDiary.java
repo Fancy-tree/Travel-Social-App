@@ -39,13 +39,14 @@ public class TravelDiary {
     private String mbgimgUrl;//日志背景地址
     public String getMbgimgUrl() { return mbgimgUrl; }
 
+    private String lid="";//服务器标识
+    public String getLid() { return lid; }
+
     private List<String> mContentList; //日志正文所有内容
     private List<Bitmap> mBitmapList;  //日志正文所有图片
     private List<Integer> misBitmap;  //日志正文内容项是否为图片
 
-
-
-    private List<String> mPictureUrl;//从服务器获取所有图片的url
+    private List<String> mPictureUrl=new ArrayList<String>();//从服务器获取所有图片的url
     public List<String> getmPictureUrl() { return mPictureUrl; }
     private String mIncompletePictureSaveSDCardUri;//草稿图片暂存sd卡 文件夹地址
     private String mIncompleteTextSaveSDCardUri;//草稿文本信息暂存sd卡 文件夹地址
@@ -87,34 +88,41 @@ public class TravelDiary {
 
 //    解析服务器数据: 刷新此对象(参数的json对象存储了完整的一个日志信息)
     public void refreshTravelDiaryFromIntentJsonObject(JSONObject jsonObject,int hasContentList) throws JSONException {
-        JSONObject result = jsonObject;
-        this.mtitle=result.getString("title");
-//        this.mbgimg = ImgUtil.stringToBitmapImage(result.getString("titleimg"));
-        this.mbgimgUrl = result.getString("titleimg");
+        this.mContentList.clear();
+        this.mBitmapList.clear();
+        this.misBitmap.clear();
         if(hasContentList==1){
-            JSONArray contentList = result.getJSONArray("contentList");
-            int imgCount = 0;//图片计数
-            for(int i=0;i<contentList.length();i++){
-                JSONObject item = new JSONObject();
-                item = contentList.getJSONObject(i);
-                JSONObject itemin = new JSONObject();
-                itemin.getJSONObject(i+1+"");
-                this.mContentList.clear();
-                this.mBitmapList.clear();
-                this.misBitmap.clear();
-                if(itemin.getString("type").equals("0")){
+            JSONObject result = jsonObject;
+            this.mtitle=result.getString("title");
+//        this.mbgimg = ImgUtil.stringToBitmapImage(result.getString("titleimg"));
+            this.mbgimgUrl = result.getString("titleimg");
+            int contentListlLength = result.getInt("length");
+            if(contentListlLength!=0){
+                JSONObject contentList = result.getJSONObject("contentList");
+                int imgCount = 0;//图片计数
+                for(int i=0;i<contentListlLength;i++){
+                    JSONObject itemin = new JSONObject();
+                    itemin=contentList.getJSONObject(i+1+"");
+                    if(itemin.getString("type").equals("0")){
 //                如果是文本
-                    mContentList.add(itemin.getString("content"));
-                    misBitmap.add(0);
-
-                }else{
-                    //如果是图片
-                    mContentList.add("img");
-                    mPictureUrl.add(itemin.getString("content"));
-                    misBitmap.add(1);
-
+                        mContentList.add(itemin.getString("content"));
+                        misBitmap.add(0);
+                    }else{
+                        //如果是图片
+                        mContentList.add("img");
+                        mPictureUrl.add(itemin.getString("content"));
+                        misBitmap.add(1);
+                    }
                 }
             }
+
+        }else {
+//            只读取标题和背景图
+            JSONObject result = jsonObject;
+            this.mtitle=result.getString("title");
+//        this.mbgimg = ImgUtil.stringToBitmapImage(result.getString("titleimg"));
+            this.mbgimgUrl = result.getString("titleimg");
+            this.lid = result.getString("lid");
         }
 
     }

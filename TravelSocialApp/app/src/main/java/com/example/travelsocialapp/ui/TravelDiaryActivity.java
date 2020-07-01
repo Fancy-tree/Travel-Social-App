@@ -228,7 +228,7 @@ public class TravelDiaryActivity extends BaseActivity implements View.OnClickLis
                     showToast(baseInternetMessage.getMessage());
                 }
             }
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.INVISIBLE);
             canReflush =1;
         }
     }
@@ -239,7 +239,7 @@ public class TravelDiaryActivity extends BaseActivity implements View.OnClickLis
     int isLastDiary = 0;
 //    是否可以加载更多
     int canReflush = 1;
-    //获取发送的Json信息  请求获取我的旅行日志
+    //获取发送的Json信息  请求获取我的旅行日志集合
     public String getJsonStrForIntent() {
         String result = "";
         JSONObject jsonObject = new JSONObject();
@@ -265,6 +265,9 @@ public class TravelDiaryActivity extends BaseActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1){//编写旅行日志
             if(resultCode==1){//发布成功
+//                从头开始刷新
+                travelDiaries.clear();
+                labelNumber=1;
                 // 向服务器获取更多我的旅游日志信息（最多5个）
                 TravelDiaryActivity.InternetRequestMyReleaseDiary task = new TravelDiaryActivity.InternetRequestMyReleaseDiary();
                 task.execute(C.intentRequestMyReleaseDiaryUrl);

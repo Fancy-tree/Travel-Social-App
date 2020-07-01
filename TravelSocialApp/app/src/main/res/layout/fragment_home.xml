@@ -11,25 +11,34 @@
         android:orientation="horizontal">
     </RelativeLayout>
 
-    <ScrollView
+    <ProgressBar
+        android:id="@+id/home_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:visibility="invisible"/>
+
+    <com.example.travelsocialapp.ui.View.MyScrollView
         android:id="@+id/home_scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
 
-        android:layout_marginLeft="@dimen/margin1"
-        android:layout_marginRight="@dimen/margin1"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin1"
+            android:layout_marginRight="@dimen/margin1"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:srcCompat="@color/undefine_picture_gray" />
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/shouyehaibao" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -37,17 +46,31 @@
                 style="@style/TitleText"
                 android:text="旅行发现" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/travel_diary_show"
+
+
+<!--  RecyclerView 高度能随着Item数量 自适应高度-->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1000dp"
-                android:gravity="center"
-                />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/travel_diary_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    />
+
+            </RelativeLayout>
+
+
+
+
 
 
 
         </LinearLayout>
-    </ScrollView>
+    </com.example.travelsocialapp.ui.View.MyScrollView>
 
 
 

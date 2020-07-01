@@ -177,11 +177,12 @@
 
                         <ImageView
                             android:id="@+id/city_rank_spot_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            app:srcCompat="@drawable/city_rank_img" />
+                            android:layout_marginVertical="5dp"
+                            app:srcCompat="@drawable/jingdianbang" />
 
 
                         <TableLayout
@@ -271,11 +272,12 @@
 
                         <ImageView
                             android:id="@+id/city_rank_food_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            app:srcCompat="@drawable/city_rank_img" />
+                            android:layout_marginVertical="5dp"
+                            app:srcCompat="@drawable/meishibang" />
 
 
                         <TableLayout
@@ -365,11 +367,12 @@
 
                         <ImageView
                             android:id="@+id/city_rank_shop_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10dp"
-                            app:srcCompat="@drawable/city_rank_img" />
+                            android:layout_marginVertical="5dp"
+                            app:srcCompat="@drawable/techanbang" />
 
 
                         <TableLayout
