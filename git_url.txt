@@ -1,13 +1,14 @@
-�ֿ��ַ��
+仓库地址：
 https://github.com/Fancy-tree/Travel-Social-App.git
 
-�ύ�ֿⲽ��
-git status���������������������鿴����Ŀ¼��״̬
-git add .����������������     �������ļ����ӵ��ݴ���
-git commit -m "commnet" ����  �ύ����,���ӱ�ע��Ϣ(��ʱ���ݴ�������Ϣ�ύ�����زֿ�)
-git push origin master ����   �����زֿ���ļ�push��Զ�ֿ̲�(�� push ���ɹ����ɼ� -f ����ǿ�Ʋ���)
+单人提交仓库步骤
+git status　　　　　　　　　　查看工作目录的状态
+git add .　　　　　　　　     将所有文件添加到暂存区
+git commit -m "commnet" 　　  提交更改,添加备注信息(此时将暂存区的信息提交到本地仓库)
+git push origin master 　　   将本地仓库的文件push到远程仓库(若 push 不成功，可加 -f 进行强推操作)
 
-
+多人提交仓库
 git pull --rebase origin master
-����ָ�����˼�ǰ�Զ�̿��еĸ��ºϲ������ؿ��У�δ�ύ�����Crebase��������ȡ�������ؿ��иոյ�commit���������ǽӵ����º�İ汾��֮��
-���滹��Ҫ add commit push
+这条指令的意思是把远程库中的更新合并到本地库中（未提交），–rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中
+后面还需要 add commit push
+参考网址：https://blog.csdn.net/rocling/article/details/82956402
