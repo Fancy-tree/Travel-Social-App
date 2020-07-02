@@ -1,0 +1,47 @@
+
+<div class="single-post-area mb--75 mb-md--55">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <!--日志内容-->
+                <article class="single-post mb--75 mb-md--55 pb--75 pb-md--55">
+                    <br />
+                    <br />
+                    <!-- 背景图片 -->
+                    <figure class="image">
+                        <img src="{$start.titleimg}" alt="Single Post Title" class="w-100">
+                    </figure>
+                    <!-- 背景图片End -->
+                    <!--文字标题-->
+                    <header class="single-post__header">
+                        <h2 class="single-post__title" style="font-family: Arial, 'SimSun', sans-serif ; text-align: center;">{$start.title}</h2>
+                    </header>
+                    <br />
+                    <!--文字部分-->
+                    {volist name='contentList' id='list'}
+                    {if($list.type==0)}
+                    <div class="row mb--43 mb-md-33">
+                        <div class="col-lg-12 col-md-12" style="text-indent:2em; ">
+                            <p>{$list.content}</p>
+                        </div>
+                    </div>
+                    {/if}
+                    <!--图片部分-->
+                    {if($list.type==1)}
+                    <figure class="image">
+                        <img src="{$list.content}" alt="Single Post Title" class="w-100">
+                    </figure>
+                    {/if}
+                    {/volist}
+                </article>
+
+                <!-- 日志内容结束 End -->
+        </div>
+    </div>
+</div>
+<!-- 旅行日志内容结束 End -->
+<br />
+<br />
+<br />
+</div>
+

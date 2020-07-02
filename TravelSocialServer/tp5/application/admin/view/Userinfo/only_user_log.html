@@ -1,0 +1,98 @@
+
+<div class="single-post-area mb--75 mb-md--55">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <!--日志内容-->
+                <div class="reviews-container">
+                    <div class="tab-pane active">
+                        <table style="color: #C0C0C0; text-align: left; margin-left: 12px;">
+                            <tr>
+                                <th width="50px">序号</th>
+                                <th width="140px">用户</th>
+                                <th width="300px">标题</th>
+                                <th width="250px">发布时间</th>
+                                <th width="90px">状态</th>
+                                <th width="150px">内容</th>
+                                <th width="150px">操作</th>
+                            </tr>
+                        </table>
+                        {volist name='data' id='list'}
+                        <div class="review" data-toggle="modal" data-target="#myModal" lid="{$list.lid}">
+                            <table style="text-align: left;">
+                                <tr>
+                                    <td width="50px"><span class="icon-container"><b style="color: #BF242A;">{$i}</b></span></td>
+                                    <td width="140px"><span class="icon-container">{$list.uid}</span></td>
+                                    <td width="300px"><span class="icon-container">{$list.title}</span></td>
+                                    <td width="250px"><span class="icon-container">{$list.datetime}</span></td>
+                                    <td width="90px">{if($list.d_state==0)}<span class="icon-container">&nbsp;{$list.d_state}</span>{/if}{if($list.d_state==1)}<span class="icon-container" style="color: #BF242A;">&nbsp;{$list.d_state}</span>{/if}</td>
+                                    <td width="150px"><span class="icon-container">&nbsp;{$list.blank_content}</span></td>
+                                    <td width="150px">{if($list.d_state==0)}<button class="review d_state" lid="{$list.lid}">修改状态</button>{/if}{if($list.d_state==1)}<button class="review " lid="{$list.lid}">状态无法还原</button>{/if}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        {/volist}
+                    </div>
+                    {volist name="user_log_all" id="list1"}
+                    {if($list1.lid==$list.lid)}
+                <article class="single-post mb--75 mb-md--55 pb--75 pb-md--55" >
+                    <br />
+                    <br />
+                    <!-- 背景图片 -->
+                    <figure class="image">
+                        <img src="{$list1.titleimg}" alt="Single Post Title" class="w-100">
+                    </figure>
+                    <!-- 背景图片End -->
+                    <!--文字标题-->
+                    <header class="single-post__header">
+                        <h2 class="single-post__title" style="font-family: Arial, 'SimSun', sans-serif ; text-align: center;">{$list1.title}</h2>
+                    </header>
+                    <br />
+                    <!--文字部分-->
+                    {volist name="list1['contentList']" id='contentList'}
+                    {if($contentList.type==0)}
+                    <div class="row mb--43 mb-md-33">
+                        <div class="col-lg-12 col-md-12" style="text-indent:2em; ">
+                            <p>{$contentList.content}</p>
+                        </div>
+                    </div>
+                    {/if}
+                    <!--图片部分-->
+                    {if($contentList.type==1)}
+                    <figure class="image">
+                        <img src="{$contentList.content}" alt="Single Post Title" class="w-100">
+                    </figure>
+                    {/if}
+                    {/volist}
+
+                </article>
+                    </div>
+                    {/if}
+                    {/volist}
+                <div id="page" class="page" >
+                    {$page}
+                </div>
+                <!-- 日志内容结束 End -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 旅行日志内容结束 End -->
+<br />
+<br />
+<br />
+
+<script>
+    $(function(){
+        $(".d_state").click(function(event){
+            var $lid=null;
+            $lid=$(this).attr("lid");
+            if(window.confirm("你确定要修改'"+$lid+"'用户旅行日志的状态嘛吗？"))
+            {
+                location.href="__MODULE__/d_state_log?lid="+$lid;
+            }
+        });
+
+    });
+</script>

@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>轻旅后台</title>
+
+  <link href="__PUBLIC__/index/css/layout.css" rel="stylesheet" type="text/css"/>
+  <link href="__PUBLIC__/index/css/table-style.css" rel="stylesheet" type="text/css"/>
+  <link href="__PUBLIC__/index/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="__PUBLIC__/index/css/vendor.css" type="text/css">
+  <link rel="stylesheet" href="__PUBLIC__/index/css/main.css" type="text/css">
+  <script src="__PUBLIC__/index/js/jquery-3.3.1.min.js"></script>
+  <script src="__PUBLIC__/index/js/bootstrap.min.js"></script>
+  <script src="__PUBLIC__/index/js/vendor.js"></script>
+  <script src="__PUBLIC__/index/js/main.js"></script>
+</head>
+
+<body>
+
+<div class="left-menu">
+  <div class="logo"><i class="fa fa-align-justify"></i>
+    <div>Easy Travel BAXCKSTAGE</div>
+  </div>
+  <div class="accordion">
+    <div class="section">
+      <input type="radio" name="accordion-1" id="section-1" checked="checked"/>
+      <label for="section-1"><span>管理员账户管理</span></label>
+      <div class="content">
+        <ul>
+          <li><a href="__MODULE__/nickname" id="Index_index"><i class="fa fa-share"></i><span>设置个人昵称</span></a></li>
+          <li><a href="__MODULE__/logout" id="Login_logout"><i class="fa fa-share"></i><span>退出登录</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <input type="radio" name="accordion-1" id="section-2" value="toggle"/>
+      <label for="section-2"><span>用户信息管理</span></label>
+      <div class="content">
+        <ul>
+          <li><a href="__MODULE__/checkuser" id="Userinfo_checkuser"><i class="fa fa-sitemap"></i><span>查看用户</span></a></li>
+          <li><i class="fa fa-cog"></i><span>搜索用户</span></li>
+          <li><i class="fa fa-group"></i><span>查看用户资料 </span></li>
+          <li><i class="fa fa-group"></i><span>冻结用户</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <input type="radio" name="accordion-1" id="section-3" value="toggle"/>
+      <label for="section-3"><span>城市信息管理</span></label>
+      <div class="content">
+        <ul>
+          <li><a href="__MODULE__/checkcity" id="Cityinfo_checkcity"><i class="fa fa-coffee"></i><span>查看城市信息</span></a></li>
+          <li><i class="fa fa-coffee"></i><span>新建城市信息</span></li>
+          <li><i class="fa fa-coffee"></i><span>修改城市信息</span></li>
+          <li><i class="fa fa-coffee"></i><span>新建景区词条</span></li>
+          <li><i class="fa fa-coffee"></i><span>搜索景区\城市</span></li>
+          <li><i class="fa fa-coffee"></i><span>审核新建词条</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <input type="radio" name="accordion-1" id="section-4" value="toggle"/>
+      <label for="section-4"><span>路线图管理</span></label>
+      <div class="content">
+        <ul>
+          <li><i class="fa fa-coffee"></i><span>搜索路线图</span></li>
+          <li><i class="fa fa-coffee"></i><span>查看路线图</span></li>
+          <li><i class="fa fa-coffee"></i><span>审核路线图</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <input type="radio" name="accordion-1" id="section-5" value="toggle"/>
+      <label for="section-5"><span>提问管理</span></label>
+      <div class="content">
+        <ul>
+          <li><i class="fa fa-coffee"></i><span>查看提问</span></li>
+          <li><i class="fa fa-coffee"></i><span>屏蔽提问</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <input type="radio" name="accordion-1" id="section-6" value="toggle"/>
+      <label for="section-6"><span>旅行日志管理</span></label>
+      <div class="content">
+        <ul>
+          <li><a href="__MODULE__/checklog" id="Travellog_checklog"><i class="fa fa-coffee"></i><span>查看旅行日志</span></a></li>
+          <li><i class="fa fa-coffee"></i><span>搜索旅行日志</span></li>
+          <li><i class="fa fa-coffee"></i><span>屏蔽旅行日志</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <input type="radio" name="accordion-1" id="section-7" value="toggle"/>
+      <label for="section-7"><span>社交管理</span></label>
+      <div class="content">
+        <ul>
+          <li><i class="fa fa-coffee"></i><span>查看用户聊天记录</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="right" style="background-color: #ffffff;">
+  <div class="title">
+    <h2>后台首页</h2>
+    <p>
+      欢迎管理员:<mark style="font-size: 24px;color: #94d6da;background-color: #fffef9;">{$Think.session.nickname}</mark>,您已经进入轻旅后台！请从左侧选择操作。
+    </p>
+  </div>
+    <hr/>
+  {__CONTENT__}
+</div>
+
+</div>
+
+</body>
+
+</html>

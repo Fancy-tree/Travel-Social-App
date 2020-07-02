@@ -28,10 +28,16 @@ return [
     'login'       => 'admin/login/index',
     'logout'      =>'admin/login/logout',
     'nickname'    =>'admin/login/nickname',
+
     'checkuser'   =>'admin/userinfo/checkuser',
     'freeze_user'   =>'admin/userinfo/freeze_user',
     'unfreeze_user'   =>'admin/userinfo/unfreeze_user',
+    'only_user_log'   =>'admin/userinfo/only_user_log',
+
     'checkcity'   =>'admin/cityinfo/checkcity',
+
     'checklog'   =>'admin/travellog/checklog',
+    'complete_log'   =>'admin/travellog/complete_log',
+    'd_state_log'   =>'admin/travellog/d_state_log',
 
 ];

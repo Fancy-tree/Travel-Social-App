@@ -126,6 +126,7 @@ class Travellog extends Controller
     }
 
 
+
 //返回个人旅行日志  out_personal_log
     public function out_personal_log()
     {

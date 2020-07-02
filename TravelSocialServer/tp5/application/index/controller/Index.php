@@ -20,16 +20,12 @@ class Index extends Controller
                 'text'=>'这是测试'
             );
             return returnJson('101','参数错误',$data);
-
-            unset ($data);
         }else{
             //如果不是一个空的json数组
             $result = $jarray['result'];//获取
             $phone = $result['phone'];
             $paswd = $result['password'];
             if ($phone == '' and $paswd == '') {
-                unset($jarray);
-
                 $data=array();
                 return returnJson('101','参数错误',$data);
                 unset ($data);
@@ -38,17 +34,10 @@ class Index extends Controller
                 $arrData = Db::query("select * from tb_user where phone='".$phone."'");
                 if(empty($arrData)){
                     //根据账号查询结果为空
-                    unset($arrData);
-                    unset($jarray);
-                    unset($phone);
-                    unset ($paswd);
                     $data=array(
                         'text'=>'这是测试'
                     );
                     return returnJson('103','账号或者密码错误',$data);
-
-                    unset ($data);
-
                 }else{
 //                    //根据账号查询结果不为空
                     if ($arrData[0]['password'] == $paswd and $arrData[0]['phone']==$phone){

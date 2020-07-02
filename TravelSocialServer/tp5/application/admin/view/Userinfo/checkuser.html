@@ -1,0 +1,131 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h2 class="text-center">用户信息</h2>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+
+<div class="reviews-container">
+
+    <div class="tab-pane active">
+        <table style="color: #C0C0C0; text-align: left; margin-left: 12px;">
+            <tr>
+                <th width="50px">序号</th>
+                <th width="140px">账号</th>
+                <th width="80px">昵称</th>
+                <th width="210px">注册时间</th>
+                <th width="90px">冻结标记</th>
+                <th width="90px">在线标志</th>
+                <th width="130px">&nbsp;&nbsp;&nbsp;操作1</th>
+                <th width="130px">&nbsp;&nbsp;&nbsp;操作2</th>
+            </tr>
+        </table>
+        {volist name='data' id='list'}
+            <div class="review">
+            <table style="text-align: left;">
+                <tr>
+                    <td width="50px"><span class="icon-container"><b style="color: #BF242A;">{$i}</b></span></td>
+                    <td width="140px"><span class="icon-container">&nbsp;{$list.phone}</span></td>
+                    <td width="80px"><span class="icon-container">{$list.Nickname}</span></td>
+                    <td width="210px"><span class="icon-container">{$list.datetime}</span></td>
+                    <td width="90px"><span class="icon-container">&nbsp;&nbsp;{$list.f_state}</span></td>
+                    <td width="90px">{if($list.code==0)}<span class="icon-container">&nbsp;&nbsp;不在线</span>{/if}{if($list.code!=0)}<span class="icon-container" style="color: #BF242A;">&nbsp;&nbsp;在线</span>{/if}</td>
+                    <td width="130px">{if($list.f_state==0)}<button class="review dongjie" lid="{$list.phone}">冻结用户</button>{/if}{if($list.f_state==1)}<button class="review jiedong" lid="{$list.phone}" style="color: #BF242A;">解冻用户</button>{/if}</td>
+                    <td width="130px"><button class="review chakanrizhi" lid="{$list.phone}">用户日志</button></td>
+                </tr>
+            </table>
+        </div>
+        {/volist}
+    </div>
+    <div id="page" class="page">
+        {$page}
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--登陆框头部-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h3 class="modal-title" id="myModalLabel">
+                    冻结用户操作
+                </h3>
+            </div>
+            <!--登陆框中间部分(from表单)-->
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <!--用户框-->
+                    <div class="form-group">
+                        <h4>是否冻结该该用户？</h4>
+                    </div>
+                    <!--登陆按钮-->
+                    <div class="form-group">
+                        <div class="col-sm-offset-10 col-sm-10">
+                            <button type="submit" class="btn btn-default">确定</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-2"></div>
+</div>
+
+<script>
+    const progressDone = document.querySelectorAll('.progress-done');
+
+    progressDone.forEach(progress => {
+        progress.style.width = progress.getAttribute('data-done') + '%';
+    });
+
+    // SOCIAL PANEL JS
+    const floating_btn = document.querySelector('.floating-btn');
+    const close_btn = document.querySelector('.close-btn');
+    const social_panel_container = document.querySelector('.social-panel-container');
+
+    floating_btn.addEventListener('click', () => {
+        social_panel_container.classList.toggle('visible')
+    });
+
+    close_btn.addEventListener('click', () => {
+        social_panel_container.classList.remove('visible')
+    });
+</script>
+
+<script>
+    $(function(){
+        $(".dongjie").click(function(event){
+            var $lid=null;
+            $lid=$(this).attr("lid");
+            if(window.confirm("你确定要冻结'"+$lid+"'账户吗？"))
+            {
+                location.href="__MODULE__/freeze_user?lid="+$lid;
+            }
+        });
+        $(".jiedong").click(function(event){
+            var $lid=null;
+            $lid=$(this).attr("lid");
+            if(window.confirm("你确定要解冻'"+$lid+"'用户吗？"))
+            {
+                location.href="__MODULE__/unfreeze_user?lid="+$lid;
+            }
+        });
+        $(".chakanrizhi").click(function(event){
+            var $lid=null;
+            $lid=$(this).attr("lid");
+            if(window.confirm("确定查看'"+$lid+"'用户的旅行日志吗？"))
+            {
+                location.href="__MODULE__/only_user_log?phone="+$lid;
+            }
+        });
+    });
+</script>
