@@ -18,7 +18,9 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        //        方便生成apk
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
     }
 }
 

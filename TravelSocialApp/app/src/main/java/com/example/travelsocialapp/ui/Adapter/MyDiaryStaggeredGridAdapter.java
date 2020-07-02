@@ -65,9 +65,8 @@ public class MyDiaryStaggeredGridAdapter extends androidx.recyclerview.widget.Re
 //        我也不知道为什么，这么写瀑布流就不会错乱太严重
         if(!(travelDiaries.get(position).getMbgimgUrl()).equals(holder.travel_diary_show_bg_pictureI.getTag())) {
             holder.travel_diary_show_bg_pictureI.setTag(travelDiaries.get(position).getMbgimgUrl());
-
+//         图片异步加载缓存机制
             ImageLoader.getInstance().displayImage(C.intentUrl+travelDiaries.get(position).getMbgimgUrl(), holder.travel_diary_show_bg_pictureI);
-
         }
 
         // 图片高度随机设置  1:1 或 3:4
